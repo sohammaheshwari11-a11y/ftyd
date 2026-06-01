@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Drishya ❤️</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght=600&family=Plus+Jakarta+Sans:wght=300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         .font-handwritten { font-family: 'Caveat', cursive; }
         .font-main { font-family: 'Plus Jakarta Sans', sans-serif; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .glow-text { text-shadow: 0 0 15px rgba(244, 63, 94, 0.5); }
         
-        /* Rigid layout system */
-        .screen { display: none; min-height: 100vh; width: 100%; justify-content: center; align-items: center; }
-        .screen.active { display: flex !important; flex-direction: column; }
+        /* Master screen logic */
+        .hidden-screen { display: none !important; }
+        .visible-screen { display: flex !important; flex-direction: column; }
         
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #0c0a09; }
@@ -23,7 +23,6 @@
 </head>
 <body class="bg-[#0c0a09] text-stone-200 font-main antialiased selection:bg-rose-950 selection:text-rose-200 overflow-x-hidden min-h-screen">
 
-    <!-- FLOATING MUSIC PLAYER -->
     <div class="fixed bottom-6 right-6 glass p-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
         <button id="playBtn" class="w-10 h-10 bg-rose-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-md hover:bg-rose-500 transition-all">▶</button>
         <div class="pr-4 text-[11px]">
@@ -33,8 +32,7 @@
         <audio id="bgMusic" src="path_to_ishq.mp3" loop></audio>
     </div>
 
-    <!-- LAYER 1: THE ADMISSION & PASSWORD GATEKEEPER -->
-    <section id="screen1" class="screen active px-6 text-center max-w-3xl mx-auto py-12">
+    <section id="screen1" class="visible-screen min-h-screen px-6 text-center max-w-3xl mx-auto py-12 justify-center items-center">
         <span class="text-xs uppercase tracking-[0.2em] text-rose-500 font-semibold mb-4 animate-pulse">Press play on the corner first 🎵</span>
         <h1 class="text-3xl md:text-5xl font-light tracking-tight text-white leading-tight">
             I hate this silence, Drishya. <br><span class="italic font-serif text-rose-400 glow-text">And I hate this break.</span>
@@ -52,16 +50,17 @@
             </p>
             <div class="flex justify-center gap-2 mb-5">
                 <input type="text" id="pass1" placeholder="word 1" class="w-24 text-center border-b border-stone-600 focus:border-rose-400 outline-none py-1 text-sm bg-transparent text-white placeholder-stone-700">
-                <span class="text-stone-600 font-light text-xl"> </span>
+                <span class="text-stone-400 font-light text-xl"> </span>
                 <input type="text" id="pass2" placeholder="word 2" class="w-24 text-center border-b border-stone-600 focus:border-rose-400 outline-none py-1 text-sm bg-transparent text-white placeholder-stone-700">
             </div>
             <p id="errorMsg" class="text-xs text-red-400 font-medium h-4 mb-3"></p>
-            <button id="unlockBtn" class="w-full bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-3.5 rounded-xl hover:bg-rose-500 transition-all shadow-lg shadow-rose-950/50">Unlock Next Thing →</button>
+            <button onclick="processPassword()" class="w-full bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-3.5 rounded-xl hover:bg-rose-500 transition-all shadow-lg shadow-rose-950/50">Unlock Next Thing →</button>
+            
+            <button onclick="forceUnlock()" class="text-[10px] text-stone-600 mt-4 underline block mx-auto hover:text-stone-400">Stuck on mobile? Click here to force unlock</button>
         </div>
     </section>
 
-    <!-- LAYER 2: THE MEMORY TIMELINE -->
-    <section id="screen2" class="screen px-6 max-w-3xl mx-auto py-16">
+    <section id="screen2" class="hidden-screen px-6 max-w-3xl mx-auto py-16 justify-center items-center">
         <h2 class="font-handwritten text-5xl text-rose-400 glow-text mb-2 text-center">How It All Started...</h2>
         <p class="text-xs text-stone-500 uppercase tracking-widest mb-12 text-center">The Timeline of Us</p>
         
@@ -100,11 +99,10 @@
             </div>
         </div>
 
-        <button onclick="changeScreen(3)" class="mt-12 bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-3.5 px-8 rounded-full shadow-md hover:bg-rose-500 transition-all">Next: Check the Odds →</button>
+        <button onclick="changeScreen(3)" class="mt-12 bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-3.5 px-8 rounded-full shadow-md hover:bg-rose-500 transition-all shadow-rose-950/50">Next: Check the Odds →</button>
     </section>
 
-    <!-- LAYER 3: THE ODDS CALCULATOR -->
-    <section id="screen3" class="screen px-6 max-w-2xl mx-auto text-center py-12">
+    <section id="screen3" class="hidden-screen px-6 max-w-2xl mx-auto text-center py-12 justify-center items-center">
         <span class="text-rose-400 text-3xl glow-text">🧩</span>
         <h2 class="text-3xl font-light text-white mt-4">What were the odds of us?</h2>
         
@@ -120,11 +118,10 @@
             We would have <span class="font-semibold text-white underline decoration-rose-400">never met</span> if I hadn't joined that specific server, or if things didn't happen exactly the way they did. You think we're supposed to just throw away those impossible odds over one bad night? <span class="text-rose-300 font-medium">Maybe it was just meant to happen.</span>
         </p>
         
-        <button onclick="changeScreen(4)" class="mt-10 bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-3.5 px-8 rounded-full shadow-md hover:bg-rose-500 transition-all">Open My Letters →</button>
+        <button onclick="changeScreen(4)" class="mt-10 bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-3.5 px-8 rounded-full shadow-md hover:bg-rose-500 transition-all shadow-rose-950/50">Open My Letters →</button>
     </section>
 
-    <!-- LAYER 4: REFLECTIONS -->
-    <section id="screen4" class="screen px-6 max-w-2xl mx-auto py-16">
+    <section id="screen4" class="hidden-screen px-6 max-w-2xl mx-auto py-16 justify-center items-center">
         <span class="text-xs uppercase tracking-[0.2em] text-rose-500 font-semibold mb-2">Part I: Reflection</span>
         <h2 class="text-2xl md:text-3xl font-light text-white mb-8 text-center">Unfiltered Discovery</h2>
         
@@ -144,8 +141,7 @@
         <button onclick="changeScreen(5)" class="mt-12 bg-stone-800 text-stone-300 border border-stone-700 text-xs tracking-widest uppercase font-semibold py-3 px-8 rounded-full hover:bg-rose-600 hover:text-white transition-all">Next Chapter →</button>
     </section>
 
-    <!-- LAYER 5: THE STORM & SILENCE -->
-    <section id="screen5" class="screen px-6 max-w-2xl mx-auto py-16">
+    <section id="screen5" class="hidden-screen px-6 max-w-2xl mx-auto py-16 justify-center items-center">
         <span class="text-xs uppercase tracking-[0.2em] text-rose-500 font-semibold mb-2">Part II: The Storm</span>
         <h2 class="text-2xl md:text-3xl font-light text-white mb-8 text-center">The Truth & The Silence</h2>
         
@@ -168,8 +164,7 @@
         <button onclick="changeScreen(6)" class="mt-12 bg-stone-800 text-stone-300 border border-stone-700 text-xs tracking-widest uppercase font-semibold py-3 px-8 rounded-full hover:bg-rose-600 hover:text-white transition-all">Clear Misunderstanding →</button>
     </section>
 
-    <!-- LAYER 6: THE MISUNDERSTANDING -->
-    <section id="screen6" class="screen px-6 max-w-2xl mx-auto py-16">
+    <section id="screen6" class="hidden-screen px-6 max-w-2xl mx-auto py-16 justify-center items-center">
         <span class="text-xs uppercase tracking-[0.2em] text-rose-500 font-semibold mb-2">Part III: Clarity</span>
         <h2 class="text-2xl md:text-3xl font-light text-white mb-8 text-center">About That One Topic</h2>
         
@@ -188,8 +183,7 @@
         <button onclick="changeScreen(7)" class="mt-12 bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-3.5 px-10 rounded-full shadow-lg hover:bg-rose-500 transition-all shadow-rose-950/50">Open The Mega Letter 💝</button>
     </section>
 
-    <!-- LAYER 7: THE MEGA LETTER & BLUEPRINT -->
-    <section id="screen7" class="screen px-6 max-w-3xl mx-auto py-16">
+    <section id="screen7" class="hidden-screen px-6 max-w-3xl mx-auto py-16 justify-center items-center">
         <span class="text-xs uppercase tracking-[0.2em] text-rose-500 font-semibold mb-2">Part IV: The Core</span>
         <h2 class="font-handwritten text-4xl md:text-5xl text-rose-400 glow-text mb-8 text-center">Kitni Mushkil Se Toh Mili Hai Yaar...</h2>
         
@@ -213,7 +207,6 @@
             </p>
         </div>
 
-        <!-- Blueprint Details -->
         <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 text-center w-full max-w-2xl">
             <div class="glass p-3 rounded-xl text-[11px]"><div class="text-lg mb-1">🌹</div><p class="font-semibold text-rose-400">Pink & Red Roses</p><span class="text-[10px] text-stone-500">With Baby's Breath</span></div>
             <div class="glass p-3 rounded-xl text-[11px]"><div class="text-lg mb-1">🐕</div><p class="font-semibold text-rose-400">Shih Tzus</p><span class="text-[10px] text-stone-500">Our dramatic mascot</span></div>
@@ -224,8 +217,7 @@
         <button onclick="changeScreen(8)" class="mt-12 bg-stone-100 text-black text-xs tracking-widest uppercase font-bold py-4 px-10 rounded-full shadow-lg hover:bg-rose-600 hover:text-white transition-all">Proceed to Final Scene →</button>
     </section>
 
-    <!-- LAYER 8: THE MOVIE POST-CREDITS SCROLL & PLOT TWIST -->
-    <section id="screen8" class="screen justify-start items-center py-20 px-6">
+    <section id="screen8" class="hidden-screen justify-start items-center py-20 px-6">
         <div class="max-w-xl text-center flex flex-col items-center w-full">
             <h2 class="text-rose-500 font-serif italic text-2xl tracking-widest uppercase font-light mb-4 glow-text">Post-Credits Scene</h2>
             <p class="text-stone-600 uppercase tracking-widest text-[10px] mb-16">Start scrolling slowly...</p>
