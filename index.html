@@ -5,95 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Drishya ❤️</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght=600&family=Plus+Jakarta+Sans:wght=300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght=600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         .font-handwritten { font-family: 'Caveat', cursive; }
         .font-main { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .glow-text { text-shadow: 0 0 15px rgba(244, 63, 94, 0.5); }
         
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #0c0a09; }
-        ::-webkit-scrollbar-thumb { background: #292524; }
+        /* Premium Soft Obsidian Glass Theme */
+        .glass-panel { background: rgba(20, 17, 16, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glow-subtle { box-shadow: 0 0 30px rgba(244, 63, 94, 0.06); }
+        .glow-text { text-shadow: 0 0 15px rgba(244, 63, 94, 0.4); }
+        
+        /* Bulletproof Screen System - Using display:none/flex overrides */
+        .page-layer { display: none; min-height: 100vh; width: 100%; padding: 24px; justify-content: center; align-items: center; }
+        .page-layer.active-layer { display: flex !important; flex-direction: column; }
+        
+        /* Tactile Envelope Crafting */
+        .letter-box {
+            background: linear-gradient(135deg, #1a1514 0%, #110d0c 100%);
+            border: 1px solid rgba(244, 63, 94, 0.15);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+        }
+        .letter-box:hover {
+            border-color: #f43f5e;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(244, 63, 94, 0.1);
+        }
     </style>
 </head>
-<body class="bg-[#0c0a09] text-stone-200 font-main antialiased selection:bg-rose-950 selection:text-rose-200 overflow-x-hidden min-h-screen">
+<body class="bg-[#0a0807] text-[#e4e2e1] font-main antialiased selection:bg-rose-950 selection:text-rose-200 overflow-x-hidden min-h-screen">
 
-    <!-- FLOATING MUSIC PLAYER (Native Audio Integration) -->
-    <div class="fixed bottom-6 right-6 glass p-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
+    <!-- FLOATING MUSIC PLAYER -->
+    <div class="fixed bottom-6 right-6 glass-panel p-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
         <button id="playBtn" class="w-10 h-10 bg-rose-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-md hover:bg-rose-500 transition-all">▶</button>
-        <div class="pr-4 text-[11px]">
+        <div class="pr-4 text-[11px] tracking-wide">
             <p class="font-semibold text-stone-100">Ishq</p>
             <p class="text-stone-400">Faheem Abdullah</p>
         </div>
         <audio id="bgMusic" src="path_to_ishq.mp3" loop></audio>
     </div>
 
-    <!-- SECTION 1: THE ADMISSION -->
-    <section class="min-h-screen px-6 text-center max-w-3xl mx-auto flex flex-col justify-center items-center">
-        <span class="text-xs uppercase tracking-[0.2em] text-rose-500 font-semibold mb-4 animate-pulse">Press play on the corner first 🎵</span>
+    <!-- SCREEN 1: THE START -->
+    <section id="layer1" class="page-layer active-layer text-center max-w-2xl mx-auto">
+        <span class="text-xs uppercase tracking-[0.25em] text-rose-500 font-semibold mb-4 animate-pulse">A Private Space</span>
         <h1 class="text-3xl md:text-5xl font-light tracking-tight text-white leading-tight">
             I hate this silence, Drishya. <br><span class="italic font-serif text-rose-400 glow-text">And I hate this break.</span>
         </h1>
-        <p class="mt-6 text-base md:text-lg text-stone-400 leading-relaxed max-w-xl">
+        <p class="mt-6 text-base md:text-lg text-stone-400 leading-relaxed max-w-md">
             I really like talking to you, and now, <span class="font-medium text-stone-200">mujhe ghuma firaake bhi nahi bolna...</span>
         </p>
-        <p class="mt-3 text-2xl md:text-4xl font-semibold text-rose-400 tracking-wide glow-text">
+        <p class="mt-3 text-2xl md:text-3xl font-semibold text-rose-400 tracking-wide glow-text mb-10">
             I really really realllyyyy like you ❤️
         </p>
-        <div class="mt-16 text-xs text-stone-500 tracking-widest animate-bounce">
-            SCROLL DOWN TO READ ↓
-        </div>
+        <button onclick="navTo(2)" class="bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-4 px-10 rounded-full shadow-lg hover:bg-rose-500 transition-all shadow-rose-950/40">
+            Open Entry Gate →
+        </button>
     </section>
 
-    <!-- SECTION 2: THE MEMORY TIMELINE -->
-    <section class="min-h-screen px-6 max-w-3xl mx-auto py-16 flex flex-col justify-center items-center">
+    <!-- SCREEN 2: THE TIMELINE -->
+    <section id="layer2" class="page-layer max-w-3xl mx-auto py-12">
         <h2 class="font-handwritten text-5xl text-rose-400 glow-text mb-2 text-center">How It All Started...</h2>
         <p class="text-xs text-stone-500 uppercase tracking-widest mb-12 text-center">The Timeline of Us</p>
         
-        <div class="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-0.5 before:bg-stone-800 w-full">
-            <div class="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-0 pl-8 md:pl-0">
-                <div class="md:w-[45%] md:text-right glass p-6 rounded-xl">
-                    <span class="text-xs font-bold text-rose-400 uppercase tracking-wider">Feb - March</span>
-                    <p class="text-sm text-stone-300 mt-2 leading-relaxed">
-                        Active on DC, I always noticed you—the high energy, unfiltered girlie, afraid of nothing. <span class="font-semibold text-rose-300">KABHI DOMINANT, KABHI ROOKIE, KABHI CALM, KABHI ROOKIE lolll</span>. When we actually started talking around March, I never felt so good and comfortable talking to someone.
-                    </p>
-                </div>
-                <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-rose-500 border-4 border-[#0c0a09] -translate-x-2"></div>
-                <div class="md:w-[45%]"></div>
+        <div class="space-y-6 w-full">
+            <div class="glass-panel p-6 rounded-2xl glow-subtle">
+                <span class="text-xs font-bold text-rose-400 uppercase tracking-wider block mb-1">Feb - March · The Discovery</span>
+                <p class="text-sm text-stone-300 leading-relaxed">
+                    Active on DC, I always noticed you—the high energy, unfiltered girlie, afraid of nothing. <span class="font-semibold text-rose-300">KABHI DOMINANT, KABHI ROOKIE, KABHI CALM, KABHI ROOKIE lolll</span>. When we actually started talking around March, I never felt so good and comfortable talking to someone.
+                </p>
             </div>
-
-            <div class="relative flex flex-col md:flex-row-reverse items-start md:items-center justify-between gap-4 md:gap-0 pl-8 md:pl-0">
-                <div class="md:w-[45%] glass p-6 rounded-xl">
-                    <span class="text-xs font-bold text-rose-400 uppercase tracking-wider">April 7</span>
-                    <p class="text-sm text-stone-300 mt-2 leading-relaxed">
-                        Our very first call. Damnn, I was completely stunned after talking to you. Cutie, unfiltered, and all of it. We sneaked in phones just to talk, dozing off sometimes... <span class="text-rose-300 font-medium">the last thought when you slept was me</span> (taking the positives hehe).
-                    </p>
-                </div>
-                <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-rose-500 border-4 border-[#0c0a09] -translate-x-2"></div>
-                <div class="md:w-[45%]"></div>
+            <div class="glass-panel p-6 rounded-2xl glow-subtle">
+                <span class="text-xs font-bold text-rose-400 uppercase tracking-wider block mb-1">April 7 · The First Voice</span>
+                <p class="text-sm text-stone-300 leading-relaxed">
+                    Our very first call. Damnn, I was completely stunned after talking to you. Cutie, unfiltered, and all of it. We sneaked in phones just to talk, dozing off sometimes... <span class="text-rose-300 font-medium">the last thought when you slept was me</span> (taking the positives hehe).
+                </p>
             </div>
-
-            <div class="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-0 pl-8 md:pl-0">
-                <div class="md:w-[45%] md:text-right glass p-6 rounded-xl">
-                    <span class="text-xs font-bold text-rose-400 uppercase tracking-wider">The Golden Week</span>
-                    <p class="text-sm text-stone-300 mt-2 leading-relaxed">
-                        The week we talked on call nearly every day. <span class="font-semibold text-white">We even recorded a 5-hour call!</span> Crazy stuff yaar, always 3+ hours. You showed me princess stories, and it was crazy how we never ran out of topics. Solving your trust issues? I am completely signed up for it.
-                    </p>
-                </div>
-                <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-rose-500 border-4 border-[#0c0a09] -translate-x-2"></div>
-                <div class="md:w-[45%]"></div>
+            <div class="glass-panel p-6 rounded-2xl glow-subtle">
+                <span class="text-xs font-bold text-rose-400 uppercase tracking-wider block mb-1">The Golden Era · Seamless Connection</span>
+                <p class="text-sm text-stone-300 leading-relaxed">
+                    The week we talked on call nearly every day. <span class="font-semibold text-white">We even recorded a 5-hour call!</span> Crazy stuff yaar, always 3+ hours. You showed me princess stories, and it was crazy how we never ran out of topics. Solving your trust issues? I am completely signed up for it.
+                </p>
             </div>
         </div>
-        <div class="mt-12 text-stone-600 text-xs tracking-widest animate-pulse">KEEP SCROLLING ↓</div>
+        <button onclick="navTo(3)" class="mt-10 bg-stone-900 border border-stone-800 text-stone-200 text-xs tracking-widest uppercase font-semibold py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all">
+            Continue Journey →
+        </button>
     </section>
 
-    <!-- SECTION 3: THE ODDS CALCULATOR -->
-    <section class="min-h-screen px-6 max-w-2xl mx-auto text-center py-12 flex flex-col justify-center items-center">
-        <span class="text-rose-400 text-3xl glow-text">🧩</span>
-        <h2 class="text-3xl font-light text-white mt-4">What were the odds of us?</h2>
+    <!-- SCREEN 3: THE ODDS PROBABILITY -->
+    <section id="layer3" class="page-layer max-w-2xl mx-auto text-center">
+        <span class="text-rose-400 text-4xl glow-text">🧩</span>
+        <h2 class="text-3xl font-light text-white mt-4 tracking-tight">What were the odds of us?</h2>
         
-        <div class="my-8 p-6 bg-stone-950/80 text-green-400 font-mono rounded-2xl text-left border border-stone-800 shadow-inner w-full space-y-2 text-xs md:text-sm">
+        <div class="my-8 p-6 bg-[#0f0c0b] text-green-400 font-mono rounded-2xl text-left border border-stone-900 shadow-inner w-full space-y-2 text-xs md:text-sm">
             <p>> Pool: 8,000,000,000 people globally...</p>
             <p>> Running background filters on locations...</p>
             <p>> Variable: Joining the exact same Discord server...</p>
@@ -101,128 +105,119 @@
             <p class="text-rose-400 font-semibold pt-4 animate-pulse">> Probability of us ever knowing each other = 0.00001%</p>
         </div>
         
-        <p class="text-stone-300 leading-relaxed text-base md:text-lg">
+        <p class="text-stone-300 leading-relaxed text-base mb-10 max-w-md mx-auto">
             We would have <span class="font-semibold text-white underline decoration-rose-400">never met</span> if I hadn't joined that specific server, or if things didn't happen exactly the way they did. You think we're supposed to just throw away those impossible odds over one bad night? <span class="text-rose-300 font-medium">Maybe it was just meant to happen.</span>
         </p>
+        <button onclick="navTo(4)" class="bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-4 px-10 rounded-full shadow-lg hover:bg-rose-500 transition-all shadow-rose-950/50">
+            Proceed to the Letters →
+        </button>
     </section>
 
-    <!-- SECTION 4: THE HEART LETTERS -->
-    <section class="min-h-screen px-6 max-w-2xl mx-auto py-16 flex flex-col justify-center items-center">
-        <span class="text-xs uppercase tracking-[0.2em] text-rose-500 font-semibold mb-2">My Open Letters</span>
-        <h2 class="text-2xl md:text-3xl font-light text-white mb-12 text-center">What I Wanted to Say on Call</h2>
+    <!-- SCREEN 4: THE INTERACTIVE SEALED ENVELOPES -->
+    <section id="layer4" class="page-layer max-w-4xl mx-auto">
+        <h2 class="font-handwritten text-5xl text-rose-400 glow-text mb-2 text-center">The Sealed Archives</h2>
+        <p class="text-xs text-stone-500 uppercase tracking-widest mb-12 text-center">Unwrap each beautiful box sequentially to open the notes</p>
         
-        <div class="space-y-8 w-full text-stone-300 leading-relaxed text-sm md:text-base">
-            <!-- Box 1 -->
-            <div class="glass p-6 rounded-2xl border-l-4 border-l-rose-500 shadow-xl">
-                <span class="text-xs font-semibold text-rose-400 block mb-2">01 · Taking The Lead</span>
-                <p>
-                    Until now, I think I <span class="text-white font-semibold underline decoration-rose-500">never took the lead in this relationship</span> because I was kinda scared, but now, <span class="text-white font-semibold">I really want to take the lead</span>. Now that I'm free from exams, I feel so good about this when I think about all of it. ❤️
-                </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+            <div onclick="revealNote(1)" class="letter-box p-6 rounded-2xl flex items-center justify-between">
+                <div><span class="text-xs font-bold text-rose-500">Box 01</span><h3 class="font-medium text-stone-200 text-base mt-1 tracking-wide">Taking The Lead</h3></div>
+                <div class="text-xl text-stone-500" id="boxIcon1">✉️</div>
             </div>
-            
-            <!-- Box 2 -->
-            <div class="glass p-6 rounded-2xl shadow-xl">
-                <span class="text-xs font-semibold text-rose-400 block mb-2">02 · Unfiltered Discovery</span>
-                <p>
-                    I really was unsure on how to talk with you at first, but <span class="text-rose-300 font-medium">you really made it easy to talk, validated me, even supported me...</span> I discovered a completely different side of you, your nature, your care, the way you discussed it out—everything with me, even the tea 😋, gossips, even about you, I really felt special. I love the side of you when you aren't afraid to communicate.
-                </p>
+            <div onclick="revealNote(2)" class="letter-box p-6 rounded-2xl flex items-center justify-between">
+                <div><span class="text-xs font-bold text-rose-500">Box 02</span><h3 class="font-medium text-stone-200 text-base mt-1 tracking-wide">The Side I Discovered</h3></div>
+                <div class="text-xl text-stone-500" id="boxIcon2">✉️</div>
             </div>
-
-            <!-- Box 3 -->
-            <div class="glass p-6 rounded-2xl border-l-4 border-l-red-500 shadow-xl">
-                <span class="text-xs font-semibold text-red-400 block mb-2">03 · The Escalation</span>
-                <p>
-                    Even when we got into our last convo, <span class="text-white font-medium">I came into it as a discussion, never ever to end it...</span> I never had intentions to end it and never will. 
-                </p>
-                <p class="mt-4">
-                    Phir, jab mai already breakdown me tha, idk, things just escalated quickly, aur firr I said things, and started pointing out things which didn't even exist, or even idk. And when you actually said <span class="text-red-400 font-semibold">"I'm done,"</span> that <span class="underline decoration-red-500 font-semibold">hurt me in my heart</span>, and I can't even express how much. I couldn't sleep that night, hence spammed msgs on all of your accs.
-                </p>
+            <div onclick="revealNote(3)" class="letter-box p-6 rounded-2xl flex items-center justify-between">
+                <div><span class="text-xs font-bold text-rose-500">Box 03</span><h3 class="font-medium text-stone-200 text-base mt-1 tracking-wide">The Breakdown Escalation</h3></div>
+                <div class="text-xl text-stone-500" id="boxIcon3">✉️</div>
             </div>
-
-            <!-- Box 4 -->
-            <div class="glass p-6 rounded-2xl shadow-xl">
-                <span class="text-xs font-semibold text-rose-400 block mb-2">04 · The Break & Silence</span>
-                <p>
-                    When I woke up and saw your msg regarding a break, I still felt okay... even about the call, <span class="text-rose-300 font-medium">I just wanted to confirm or propose to you</span>, as my exams and overall everything was done. But then when you blocked me, <span class="text-white font-semibold">this silence, it really bites 😔</span>, and as far as I know you, even you care so much that even you might've felt it. Breaks like these just make us feel how important the person actually was.
-                </p>
+            <div onclick="revealNote(4)" class="letter-box p-6 rounded-2xl flex items-center justify-between">
+                <div><span class="text-xs font-bold text-rose-500">Box 04</span><h3 class="font-medium text-stone-200 text-base mt-1 tracking-wide">The Silence That Bites</h3></div>
+                <div class="text-xl text-stone-500" id="boxIcon4">✉️</div>
             </div>
-
-            <!-- Box 5 -->
-            <div class="glass p-6 rounded-2xl shadow-xl">
-                <span class="text-xs font-semibold text-rose-400 block mb-2">05 · That Workout Misunderstanding</span>
-                <p>
-                    About one topic, <span class="text-white underline decoration-rose-400 font-medium">it breaks during workout wala</span>... I literally did not know anything about it. I literally said it out of care, and didn't know what it is actually for. <span class="italic text-stone-400">I googled it and I just was randomly talking about it 😭</span>, so yea, mujhe pata tak ni tha.
-                </p>
-                <p class="mt-4">
-                    But during the final argument day, I got to know what it actually is and even I thought, anyone would feel grossed out, but see, <span class="text-rose-400 font-semibold">kasam se pata ni tha yawrrr 🥺...</span>
-                </p>
-                <p class="mt-4">
-                    That argument was just <span class="text-white font-semibold">one terrible night</span> out of all the three months we have talked and known each other. I'm not like this. You had just returned from weakness (I hope you're doing good now), I just started to recover from my breakdown, and everything came out together so heavy that we just exploded and took a break.
-                </p>
+            <div onclick="revealNote(5)" class="letter-box p-6 rounded-2xl flex items-center justify-between">
+                <div><span class="text-xs font-bold text-rose-500">Box 05</span><h3 class="font-medium text-stone-200 text-base mt-1 tracking-wide">The Misunderstanding Explained</h3></div>
+                <div class="text-xl text-stone-500" id="boxIcon5">✉️</div>
+            </div>
+            <div onclick="revealNote(6)" class="letter-box p-6 rounded-2xl flex items-center justify-between md:col-span-2 border-rose-500/30 bg-rose-950/10">
+                <div><span class="text-xs font-bold text-rose-400">Box 06 · Special Master Note</span><h3 class="font-semibold text-white text-lg mt-1 tracking-wide">Kitni Mushkil Se Toh Mili Hai Yaar...</h3></div>
+                <div class="text-xl text-rose-500 animate-bounce" id="boxIcon6">💝</div>
             </div>
         </div>
+
+        <!-- STYLISH OVERLAY LETTER CONTENT BOX -->
+        <div id="textOverlay" class="mt-8 w-full max-w-2xl glass-panel p-8 rounded-3xl glow-subtle hidden relative animate-fadeIn">
+            <button onclick="hideNote()" class="absolute top-4 right-4 text-stone-500 hover:text-white text-xl font-light">&times;</button>
+            <div id="textContent" class="text-stone-200 leading-relaxed text-sm md:text-base space-y-4"></div>
+        </div>
+
+        <button onclick="navTo(5)" class="mt-12 bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-4 px-10 rounded-full shadow-lg hover:bg-rose-500 transition-all">
+            Next: Her Blueprint →
+        </button>
     </section>
 
-    <!-- SECTION 5: THE MEGA CONFESSION (BOX 6 COMPLETE) -->
-    <section class="min-h-screen px-6 max-w-3xl mx-auto py-16 flex flex-col justify-center items-center">
-        <span class="text-xs uppercase tracking-[0.2em] text-rose-500 font-semibold mb-2">The Real Core</span>
-        <h2 class="font-handwritten text-4xl md:text-5xl text-rose-400 glow-text mb-8 text-center">Kitni Mushkil Se Toh Mili Hai Yaar...</h2>
+    <!-- SCREEN 5: BLUEPRINT DETAILS -->
+    <section id="layer5" class="page-layer max-w-4xl mx-auto">
+        <h2 class="font-handwritten text-5xl text-rose-400 glow-text mb-2 text-center">Your Blueprint</h2>
+        <p class="text-xs text-stone-500 uppercase tracking-widest mb-12 text-center">The tiny things I hold on to</p>
         
-        <div class="glass p-6 md:p-8 rounded-3xl border border-rose-500/20 text-stone-200 leading-relaxed text-sm md:text-base w-full shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400"></div>
-            
-            <p class="text-base md:text-lg text-white font-medium tracking-wide">
-                And Drishya, I really can't lose this connection, <span class="bg-rose-950/60 border border-rose-800/40 px-1.5 py-0.5 rounded text-rose-300 font-semibold">kitni mushkil se toh mili hai yaar</span>. 
-            </p>
-            <p class="mt-4">
-                JUST IMAGINE, WHAT WERE THE ODDS OF US KNOWING EACH OTHER, DISCORD?? We would've never met, if I had not joined this server, or even some things didn't happen, maybe, it was just meant to happen. 
-            </p>
-            <p class="mt-4">
-                About you, the support, the fun, your beautiful energy, you're really emotionally intelligent from what I've noticed in all of the convos until now, you're really secure, <span class="italic text-rose-400 font-medium">(and sometimes, a bit jealous, which I really love lol!)</span>, the trust in me, I really love that Drishya, and yea 🥲.
-            </p>
-            <p class="mt-4 text-stone-400 text-xs border-t border-stone-800 pt-4 leading-relaxed">
-                Btw, I really really reallyyyyy tried to tell you, bring you back, but when you blocked me, I was hurt, and still am btw 😤 but yea, <span class="text-rose-300 font-semibold">neverrr do it againnnn 🥰 (pls)</span>, not good for a relationship lol 🙂‍↕️. Omg, I didn't even know I can type and talk this much lol, but about you, I can talk endlessly, this is nothing hehe. 
-            </p>
-            <p class="mt-3 text-[11px] text-stone-500 italic leading-relaxed">
-                See, I never wanted all of this to break, everrr. This wasn't the type of confession I wanted to do, but situations arised that led to me doing this. All of this was the exact thing I wanted to say on call...
-            </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center w-full max-w-3xl">
+            <div class="glass-panel p-5 rounded-2xl"><div class="text-2xl mb-2">🌹</div><p class="text-xs uppercase font-semibold text-rose-400 tracking-wider">Flowers</p><p class="mt-2 text-xs text-stone-300 font-medium">Red & Pink Roses with Baby's Breath</p></div>
+            <div class="glass-panel p-5 rounded-2xl"><div class="text-2xl mb-2">🐕</div><p class="text-xs uppercase font-semibold text-rose-400 tracking-wider">Mascot</p><p class="mt-2 text-xs text-stone-300 font-medium">Shih Tzus (Cute & dramatic lol)</p></div>
+            <div class="glass-panel p-5 rounded-2xl"><div class="text-2xl mb-2">🌶️</div><p class="text-xs uppercase font-semibold text-rose-400 tracking-wider">Craving</p><p class="mt-2 text-xs text-stone-300 font-medium">Panipuri (Unlimited rounds pending)</p></div>
+            <div class="glass-panel p-5 rounded-2xl"><div class="text-2xl mb-2">🍧</div><p class="text-xs uppercase font-semibold text-rose-400 tracking-wider">Dessert</p><p class="mt-2 text-xs text-stone-300 font-medium">Rasmalai. Absolute top favorite.</p></div>
         </div>
-
-        <!-- Blueprint Details -->
-        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 text-center w-full max-w-2xl">
-            <div class="glass p-3 rounded-xl text-[11px]"><div class="text-lg mb-1">🌹</div><p class="font-semibold text-rose-400">Pink & Red Roses</p><span class="text-[10px] text-stone-500">With Baby's Breath</span></div>
-            <div class="glass p-3 rounded-xl text-[11px]"><div class="text-lg mb-1">🐕</div><p class="font-semibold text-rose-400">Shih Tzus</p><span class="text-[10px] text-stone-500">Our dramatic mascot</span></div>
-            <div class="glass p-3 rounded-xl text-[11px]"><div class="text-lg mb-1">🌶️</div><p class="font-semibold text-rose-400">Panipuri Dates</p><span class="text-[10px] text-stone-500">Unlimited plates pending</span></div>
-            <div class="glass p-3 rounded-xl text-[11px]"><div class="text-lg mb-1">🍧</div><p class="font-semibold text-rose-400">Rasmalai</p><span class="text-[10px] text-stone-500">No arguments allowed</span></div>
-        </div>
+        <button onclick="navTo(6)" class="mt-12 bg-stone-900 border border-stone-800 text-stone-200 text-xs tracking-widest uppercase font-semibold py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all">
+            Enter Final Chapter →
+        </button>
     </section>
 
-    <!-- SECTION 6: THE MOVIE POST-CREDITS SCROLL & PLOT TWIST -->
-    <section class="py-20 px-6 max-w-xl text-center flex flex-col items-center mx-auto w-full">
+    <!-- SCREEN 6: SCROLL EXPECTATION SETTER -->
+    <section id="layer6" class="page-layer text-center max-w-md mx-auto">
         <h2 class="text-rose-500 font-serif italic text-2xl tracking-widest uppercase font-light mb-4 glow-text">Post-Credits Scene</h2>
-        <p class="text-stone-600 uppercase tracking-widest text-[10px] mb-16">Keep scrolling slowly...</p>
-        
-        <div class="space-y-52 text-stone-500 font-light text-base md:text-lg w-full">
-            <div>Start scrolling...</div>
-            <div class="text-rose-500 font-semibold text-xl animate-pulse">I'm sorryyyyy</div>
-            <div>I never wanted all of this to break, everrr.</div>
-            <div class="text-rose-500 font-semibold text-2xl animate-pulse">I'm sorryyyyy</div>
-            <div>Keep scrolling, don't stop.</div>
-            <div class="text-rose-500 font-semibold text-3xl animate-pulse">I'm sorryyyyy</div>
-            <div>Bahaut bada ho gaya... (that's what she said lol)</div>
-            <div class="text-rose-500 font-semibold text-4xl animate-pulse">I'm sorryyyyy</div>
-            <div>Okay, only a bit more, just scroll lol...</div>
-            <div class="text-stone-300 font-medium">Tu wapas kyu nahi aayi? 😤 But it's okayyy, ek hi baat hai 😋</div>
-            <div class="text-stone-600 italic">Almost there...</div>
-            <div class="text-stone-400">That—</div>
-            <div class="text-stone-300">That—</div>
-            <div class="text-stone-200">That—</div>
-            <div class="text-2xl text-white font-semibold tracking-wider glow-text">I really really reallyyyyy—</div>
-        </div>
+        <p class="text-stone-300 text-sm leading-relaxed mb-8">
+            You've navigated through my words. There's just one final thing left. Advance to the frame, and scroll down very slowly.
+        </p>
+        <button onclick="navTo(7)" class="bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-4 px-10 rounded-full shadow-lg hover:bg-rose-500 transition-all">
+            Start Final Roll →
+        </button>
+    </section>
 
-        <!-- The Ultimate Uncovering -->
-        <div class="mt-64 pt-32 pb-20 border-t border-stone-950 w-full">
-            <span class="text-rose-500 text-xs font-semibold uppercase tracking-[0.3em] block mb-4">The Plot Twist</span>
+    <!-- SCREEN 7: MOVIE CREDITS SCROLL CHAIN -->
+    <section id="layer7" class="page-layer bg-black text-center py-16">
+        <div class="max-w-xl text-center flex flex-col items-center w-full">
+            <p class="text-stone-600 uppercase tracking-widest text-[10px] mb-20 animate-pulse">Scroll downward continuously...</p>
+            
+            <div class="space-y-64 text-stone-500 font-light text-base md:text-lg w-full">
+                <div>Begin sequence...</div>
+                <div class="text-rose-600 font-semibold text-xl">I'm sorryyyyy</div>
+                <div>I never wanted all of this to break, everrr.</div>
+                <div class="text-rose-600 font-semibold text-2xl">I'm sorryyyyy</div>
+                <div>Keep moving down, don't stop.</div>
+                <div class="text-rose-600 font-semibold text-3xl">I'm sorryyyyy</div>
+                <div>Bahaut bada ho gaya... (that's what she said lol)</div>
+                <div class="text-rose-600 font-semibold text-4xl">I'm sorryyyyy</div>
+                <div>Okay, only a bit more, just scroll lol...</div>
+                <div class="text-stone-300 font-medium">Tu wapas kyu nahi aayi? 😤 But it's okayyy, ek hi baat hai 😋</div>
+                <div class="text-stone-600 italic">Right at the border...</div>
+                <div class="text-stone-400">That—</div>
+                <div class="text-stone-300">That—</div>
+                <div class="text-stone-200">That—</div>
+                <div class="text-2xl text-white font-semibold tracking-wider glow-text">I really really reallyyyyy—</div>
+            </div>
+
+            <div class="mt-64 pt-24 border-t border-stone-900 w-full">
+                <button onclick="navTo(8)" class="bg-white text-black text-xs tracking-widest uppercase font-bold py-4 px-12 rounded-full shadow-2xl hover:bg-rose-500 hover:text-white transition-all">
+                    Click to Uncover Plot Twist 🎬
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 8: THE FINALE REVEAL -->
+    <section id="layer8" class="page-layer bg-black text-center">
+        <div class="max-w-xl mx-auto px-6">
+            <span class="text-rose-500 text-xs font-semibold uppercase tracking-[0.3em] block mb-4">The Final Plot Twist</span>
             <h3 class="text-3xl md:text-5xl font-serif italic font-medium leading-snug text-white">
                 I was <span class="underline decoration-rose-500 glow-text">never</span> planning to let you go.
             </h3>
@@ -234,26 +229,29 @@
             </p>
             
             <div class="mt-10">
-                <a href="https://discord.com" target="_blank" class="inline-block bg-white text-black text-xs tracking-widest uppercase font-bold py-4 px-12 rounded-full shadow-2xl hover:bg-rose-500 hover:text-white transform hover:scale-105 transition-all duration-300">
+                <a href="https://discord.com" target="_blank" class="inline-block bg-white text-black text-xs tracking-widest uppercase font-bold py-4 px-12 rounded-full shadow-xl hover:bg-rose-500 hover:text-white transform hover:scale-105 transition-all duration-300">
                     Text Me on Discord
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- IMMUNE SCRIPT ENGINE (Audio Player Controls Only) -->
+    <!-- RIGID LOGIC SWITCH ENGINE -->
     <script>
-        var btn = document.getElementById('playBtn');
-        var audio = document.getElementById('bgMusic');
-        btn.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.play().catch(function(e){ console.log("Blocked"); });
-                btn.innerText = '⏸';
-            } else {
-                audio.pause();
-                btn.innerText = '▶';
-            }
-        });
-    </script>
-</body>
-</html>
+        // Immutably organized note dataset with clean highlights
+        var narrativeTexts = {
+            1: `<span class="text-xs font-semibold text-rose-400 uppercase tracking-wider block mb-2">Note 01 · Taking Control</span>
+                <p>Until now, I think I <span class="text-white font-semibold underline decoration-rose-400">never took the lead in this relationship</span> because I was kinda scared, but now, <span class="text-white font-semibold">I really want to take the lead</span>.</p>
+                <p class="mt-3">But now that I'm kinda free from exams, I now feel good about this when I think all of it ❤️</p>`,
+                
+            2: `<span class="text-xs font-semibold text-rose-400 uppercase tracking-wider block mb-2">Note 02 · Unveiling Comfort</span>
+                <p>I really was unsure on how to talk with you, but <span class="text-rose-300 font-medium">you really made it easy to talk, validated me, even supported me...</span></p>
+                <p class="mt-3">I discovered a completely different side of you, your nature, your care, the way you discussed it out—everything with me, even the tea 😋, gossips, even about you, I really felt special. I really love the side of you when you aren't afraid to communicate.</p>`,
+                
+            3: `<span class="text-xs font-semibold text-rose-400 uppercase tracking-wider block mb-2">Note 03 · The Terrible Night</span>
+                <p>Even when we got into our last Convo, <span class="text-white font-medium underline decoration-rose-400">I came into it as a discussion, never ever to end it...</span> I never had intentions to end it and never will.</p>
+                <p class="mt-3">Firr, jab mai already breakdown me tha, idk, things just escalated quickly, aur firr I said things, and started pointing out things which didn't even exist, or even idk. And when you actually said that <span class="text-red-400 font-semibold">"I'm done,"</span> that <span class="font-semibold text-white">hurt me in my heart</span>, and I can't even express how much. I couldn't sleep that night, hence spammed msgs on all of your accs.</p>`,
+                
+            4: `<span class="text-xs font-semibold text-rose-400 uppercase tracking-wider block mb-2">Note 04 · The Weight of Absence</span>
+                <p>When I woke up and saw your msg regarding a break, I still felt okay... even about the call, <span class="text-rose-300 font-medium">I just wanted to confirm or propose to you</span>, as my exams and overall everything was done.</p>
+                <p class="mt-3">But then when you blocked me, <span class="text-white font-semibold tracking-wide">this silence, it really bites 😔</span>, and as far as I know 
