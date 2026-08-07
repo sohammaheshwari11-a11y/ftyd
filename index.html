@@ -1,257 +1,570 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Drishya ❤️</title>
+    <title>For Drishya | An Interactive Story ❤️</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght=600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Cinzel:wght@400;600;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
     <style>
+        .font-serif-cinematic { font-family: 'Cinzel', serif; }
         .font-handwritten { font-family: 'Caveat', cursive; }
         .font-main { font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        /* Premium Soft Obsidian Glass Theme */
-        .glass-panel { background: rgba(20, 17, 16, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .glow-subtle { box-shadow: 0 0 30px rgba(244, 63, 94, 0.06); }
-        .glow-text { text-shadow: 0 0 15px rgba(244, 63, 94, 0.4); }
-        
-        /* Bulletproof Screen System - Using display:none/flex overrides */
-        .page-layer { display: none; min-height: 100vh; width: 100%; padding: 24px; justify-content: center; align-items: center; }
-        .page-layer.active-layer { display: flex !important; flex-direction: column; }
-        
-        /* Tactile Envelope Crafting */
-        .letter-box {
-            background: linear-gradient(135deg, #1a1514 0%, #110d0c 100%);
-            border: 1px solid rgba(244, 63, 94, 0.15);
+
+        body {
+            background-color: #08070b;
+            color: #e4e4e7;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(18, 16, 26, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer;
         }
-        .letter-box:hover {
-            border-color: #f43f5e;
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(244, 63, 94, 0.1);
+
+        .glass-card:hover {
+            background: rgba(244, 63, 94, 0.08);
+            border-color: rgba(244, 63, 94, 0.4);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 12px 30px rgba(244, 63, 94, 0.15);
         }
+
+        /* Screen Display & Fade Transitions */
+        .screen {
+            display: none;
+            opacity: 0;
+            transform: scale(0.98);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .screen.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Movie Letterboxing */
+        .film-bar {
+            position: fixed;
+            left: 0;
+            right: 0;
+            height: 18px;
+            background: #000000;
+            z-index: 100;
+        }
+
+        /* Cinematic Vignette */
+        .vignette {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.85) 100%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #08070b; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 2px; }
     </style>
 </head>
-<body class="bg-[#0a0807] text-[#e4e2e1] font-main antialiased selection:bg-rose-950 selection:text-rose-200 overflow-x-hidden min-h-screen">
+<body class="font-main antialiased selection:bg-rose-900 selection:text-white overflow-x-hidden relative min-h-screen">
 
-    <!-- FLOATING MUSIC PLAYER -->
-    <div class="fixed bottom-6 right-6 glass-panel p-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
-        <button id="playBtn" class="w-10 h-10 bg-rose-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-md hover:bg-rose-500 transition-all">▶</button>
-        <div class="pr-4 text-[11px] tracking-wide">
-            <p class="font-semibold text-stone-100">Ishq</p>
-            <p class="text-stone-400">Faheem Abdullah</p>
-        </div>
-        <audio id="bgMusic" src="path_to_ishq.mp3" loop></audio>
+    <!-- CANVAS BACKGROUND STARFIELD -->
+    <canvas id="starCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+    
+    <!-- VIGNETTE OVERLAY -->
+    <div class="vignette"></div>
+
+    <!-- FILM BARS -->
+    <div class="film-bar top-0 border-b border-white/5"></div>
+    <div class="film-bar bottom-0 border-t border-white/5"></div>
+
+    <!-- AUDIO CONTROLLER -->
+    <div class="fixed top-8 right-8 z-50 flex items-center gap-3 glass-panel px-4 py-2.5 rounded-full border border-white/10 shadow-2xl">
+        <button id="musicToggle" onclick="toggleMusic()" class="flex items-center gap-2 focus:outline-none group">
+            <span id="musicIcon" class="text-rose-400 group-hover:scale-110 transition-transform">🎵</span>
+            <span id="musicStatus" class="text-[11px] uppercase tracking-widest text-stone-300 font-semibold">Cinematic Score</span>
+        </button>
+        <audio id="bgMusic" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=sad-soul-112330.mp3"></audio>
     </div>
 
-    <!-- SCREEN 1: THE START -->
-    <section id="layer1" class="page-layer active-layer text-center max-w-2xl mx-auto">
-        <span class="text-xs uppercase tracking-[0.25em] text-rose-500 font-semibold mb-4 animate-pulse">A Private Space</span>
-        <h1 class="text-3xl md:text-5xl font-light tracking-tight text-white leading-tight">
-            I hate this silence, Drishya. <br><span class="italic font-serif text-rose-400 glow-text">And I hate this break.</span>
-        </h1>
-        <p class="mt-6 text-base md:text-lg text-stone-400 leading-relaxed max-w-md">
-            I really like talking to you, and now, <span class="font-medium text-stone-200">mujhe ghuma firaake bhi nahi bolna...</span>
-        </p>
-        <p class="mt-3 text-2xl md:text-3xl font-semibold text-rose-400 tracking-wide glow-text mb-10">
-            I really really realllyyyy like you ❤️
-        </p>
-        <button onclick="navTo(2)" class="bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-4 px-10 rounded-full shadow-lg hover:bg-rose-500 transition-all shadow-rose-950/40">
-            Open Entry Gate →
-        </button>
-    </section>
+    <!-- ACT HEADER INDICATOR -->
+    <div class="fixed top-8 left-8 z-50 flex items-center gap-2 glass-panel px-4 py-2 rounded-full border border-white/10">
+        <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+        <span id="chapterTitle" class="text-[10px] font-serif-cinematic uppercase tracking-[0.2em] text-stone-300">ACT I: THE UNLOCK</span>
+    </div>
 
-    <!-- SCREEN 2: THE TIMELINE -->
-    <section id="layer2" class="page-layer max-w-3xl mx-auto py-12">
-        <h2 class="font-handwritten text-5xl text-rose-400 glow-text mb-2 text-center">How It All Started...</h2>
-        <p class="text-xs text-stone-500 uppercase tracking-widest mb-12 text-center">The Timeline of Us</p>
-        
-        <div class="space-y-6 w-full">
-            <div class="glass-panel p-6 rounded-2xl glow-subtle">
-                <span class="text-xs font-bold text-rose-400 uppercase tracking-wider block mb-1">Feb - March · The Discovery</span>
-                <p class="text-sm text-stone-300 leading-relaxed">
-                    Active on DC, I always noticed you—the high energy, unfiltered girlie, afraid of nothing. <span class="font-semibold text-rose-300">KABHI DOMINANT, KABHI ROOKIE, KABHI CALM, KABHI ROOKIE lolll</span>. When we actually started talking around March, I never felt so good and comfortable talking to someone.
-                </p>
-            </div>
-            <div class="glass-panel p-6 rounded-2xl glow-subtle">
-                <span class="text-xs font-bold text-rose-400 uppercase tracking-wider block mb-1">April 7 · The First Voice</span>
-                <p class="text-sm text-stone-300 leading-relaxed">
-                    Our very first call. Damnn, I was completely stunned after talking to you. Cutie, unfiltered, and all of it. We sneaked in phones just to talk, dozing off sometimes... <span class="text-rose-300 font-medium">the last thought when you slept was me</span> (taking the positives hehe).
-                </p>
-            </div>
-            <div class="glass-panel p-6 rounded-2xl glow-subtle">
-                <span class="text-xs font-bold text-rose-400 uppercase tracking-wider block mb-1">The Golden Era · Seamless Connection</span>
-                <p class="text-sm text-stone-300 leading-relaxed">
-                    The week we talked on call nearly every day. <span class="font-semibold text-white">We even recorded a 5-hour call!</span> Crazy stuff yaar, always 3+ hours. You showed me princess stories, and it was crazy how we never ran out of topics. Solving your trust issues? I am completely signed up for it.
-                </p>
-            </div>
-        </div>
-        <button onclick="navTo(3)" class="mt-10 bg-stone-900 border border-stone-800 text-stone-200 text-xs tracking-widest uppercase font-semibold py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all">
-            Continue Journey →
-        </button>
-    </section>
 
-    <!-- SCREEN 3: THE ODDS PROBABILITY -->
-    <section id="layer3" class="page-layer max-w-2xl mx-auto text-center">
-        <span class="text-rose-400 text-4xl glow-text">🧩</span>
-        <h2 class="text-3xl font-light text-white mt-4 tracking-tight">What were the odds of us?</h2>
-        
-        <div class="my-8 p-6 bg-[#0f0c0b] text-green-400 font-mono rounded-2xl text-left border border-stone-900 shadow-inner w-full space-y-2 text-xs md:text-sm">
-            <p>> Pool: 8,000,000,000 people globally...</p>
-            <p>> Running background filters on locations...</p>
-            <p>> Variable: Joining the exact same Discord server...</p>
-            <p>> Variable: Striking a conversation on the exact same night...</p>
-            <p class="text-rose-400 font-semibold pt-4 animate-pulse">> Probability of us ever knowing each other = 0.00001%</p>
-        </div>
-        
-        <p class="text-stone-300 leading-relaxed text-base mb-10 max-w-md mx-auto">
-            We would have <span class="font-semibold text-white underline decoration-rose-400">never met</span> if I hadn't joined that specific server, or if things didn't happen exactly the way they did. You think we're supposed to just throw away those impossible odds over one bad night? <span class="text-rose-300 font-medium">Maybe it was just meant to happen.</span>
-        </p>
-        <button onclick="navTo(4)" class="bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-4 px-10 rounded-full shadow-lg hover:bg-rose-500 transition-all shadow-rose-950/50">
-            Proceed to the Letters →
-        </button>
-    </section>
-
-    <!-- SCREEN 4: THE INTERACTIVE SEALED ENVELOPES -->
-    <section id="layer4" class="page-layer max-w-4xl mx-auto">
-        <h2 class="font-handwritten text-5xl text-rose-400 glow-text mb-2 text-center">The Sealed Archives</h2>
-        <p class="text-xs text-stone-500 uppercase tracking-widest mb-12 text-center">Unwrap each beautiful box sequentially to open the notes</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-            <div onclick="revealNote(1)" class="letter-box p-6 rounded-2xl flex items-center justify-between">
-                <div><span class="text-xs font-bold text-rose-500">Box 01</span><h3 class="font-medium text-stone-200 text-base mt-1 tracking-wide">Taking The Lead</h3></div>
-                <div class="text-xl text-stone-500" id="boxIcon1">✉️</div>
-            </div>
-            <div onclick="revealNote(2)" class="letter-box p-6 rounded-2xl flex items-center justify-between">
-                <div><span class="text-xs font-bold text-rose-500">Box 02</span><h3 class="font-medium text-stone-200 text-base mt-1 tracking-wide">The Side I Discovered</h3></div>
-                <div class="text-xl text-stone-500" id="boxIcon2">✉️</div>
-            </div>
-            <div onclick="revealNote(3)" class="letter-box p-6 rounded-2xl flex items-center justify-between">
-                <div><span class="text-xs font-bold text-rose-500">Box 03</span><h3 class="font-medium text-stone-200 text-base mt-1 tracking-wide">The Breakdown Escalation</h3></div>
-                <div class="text-xl text-stone-500" id="boxIcon3">✉️</div>
-            </div>
-            <div onclick="revealNote(4)" class="letter-box p-6 rounded-2xl flex items-center justify-between">
-                <div><span class="text-xs font-bold text-rose-500">Box 04</span><h3 class="font-medium text-stone-200 text-base mt-1 tracking-wide">The Silence That Bites</h3></div>
-                <div class="text-xl text-stone-500" id="boxIcon4">✉️</div>
-            </div>
-            <div onclick="revealNote(5)" class="letter-box p-6 rounded-2xl flex items-center justify-between">
-                <div><span class="text-xs font-bold text-rose-500">Box 05</span><h3 class="font-medium text-stone-200 text-base mt-1 tracking-wide">The Misunderstanding Explained</h3></div>
-                <div class="text-xl text-stone-500" id="boxIcon5">✉️</div>
-            </div>
-            <div onclick="revealNote(6)" class="letter-box p-6 rounded-2xl flex items-center justify-between md:col-span-2 border-rose-500/30 bg-rose-950/10">
-                <div><span class="text-xs font-bold text-rose-400">Box 06 · Special Master Note</span><h3 class="font-semibold text-white text-lg mt-1 tracking-wide">Kitni Mushkil Se Toh Mili Hai Yaar...</h3></div>
-                <div class="text-xl text-rose-500 animate-bounce" id="boxIcon6">💝</div>
-            </div>
-        </div>
-
-        <!-- STYLISH OVERLAY LETTER CONTENT BOX -->
-        <div id="textOverlay" class="mt-8 w-full max-w-2xl glass-panel p-8 rounded-3xl glow-subtle hidden relative animate-fadeIn">
-            <button onclick="hideNote()" class="absolute top-4 right-4 text-stone-500 hover:text-white text-xl font-light">&times;</button>
-            <div id="textContent" class="text-stone-200 leading-relaxed text-sm md:text-base space-y-4"></div>
-        </div>
-
-        <button onclick="navTo(5)" class="mt-12 bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-4 px-10 rounded-full shadow-lg hover:bg-rose-500 transition-all">
-            Next: Her Blueprint →
-        </button>
-    </section>
-
-    <!-- SCREEN 5: BLUEPRINT DETAILS -->
-    <section id="layer5" class="page-layer max-w-4xl mx-auto">
-        <h2 class="font-handwritten text-5xl text-rose-400 glow-text mb-2 text-center">Your Blueprint</h2>
-        <p class="text-xs text-stone-500 uppercase tracking-widest mb-12 text-center">The tiny things I hold on to</p>
-        
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center w-full max-w-3xl">
-            <div class="glass-panel p-5 rounded-2xl"><div class="text-2xl mb-2">🌹</div><p class="text-xs uppercase font-semibold text-rose-400 tracking-wider">Flowers</p><p class="mt-2 text-xs text-stone-300 font-medium">Red & Pink Roses with Baby's Breath</p></div>
-            <div class="glass-panel p-5 rounded-2xl"><div class="text-2xl mb-2">🐕</div><p class="text-xs uppercase font-semibold text-rose-400 tracking-wider">Mascot</p><p class="mt-2 text-xs text-stone-300 font-medium">Shih Tzus (Cute & dramatic lol)</p></div>
-            <div class="glass-panel p-5 rounded-2xl"><div class="text-2xl mb-2">🌶️</div><p class="text-xs uppercase font-semibold text-rose-400 tracking-wider">Craving</p><p class="mt-2 text-xs text-stone-300 font-medium">Panipuri (Unlimited rounds pending)</p></div>
-            <div class="glass-panel p-5 rounded-2xl"><div class="text-2xl mb-2">🍧</div><p class="text-xs uppercase font-semibold text-rose-400 tracking-wider">Dessert</p><p class="mt-2 text-xs text-stone-300 font-medium">Rasmalai. Absolute top favorite.</p></div>
-        </div>
-        <button onclick="navTo(6)" class="mt-12 bg-stone-900 border border-stone-800 text-stone-200 text-xs tracking-widest uppercase font-semibold py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all">
-            Enter Final Chapter →
-        </button>
-    </section>
-
-    <!-- SCREEN 6: SCROLL EXPECTATION SETTER -->
-    <section id="layer6" class="page-layer text-center max-w-md mx-auto">
-        <h2 class="text-rose-500 font-serif italic text-2xl tracking-widest uppercase font-light mb-4 glow-text">Post-Credits Scene</h2>
-        <p class="text-stone-300 text-sm leading-relaxed mb-8">
-            You've navigated through my words. There's just one final thing left. Advance to the frame, and scroll down very slowly.
-        </p>
-        <button onclick="navTo(7)" class="bg-rose-600 text-white text-xs tracking-widest uppercase font-semibold py-4 px-10 rounded-full shadow-lg hover:bg-rose-500 transition-all">
-            Start Final Roll →
-        </button>
-    </section>
-
-    <!-- SCREEN 7: MOVIE CREDITS SCROLL CHAIN -->
-    <section id="layer7" class="page-layer bg-black text-center py-16">
-        <div class="max-w-xl text-center flex flex-col items-center w-full">
-            <p class="text-stone-600 uppercase tracking-widest text-[10px] mb-20 animate-pulse">Scroll downward continuously...</p>
+    <!-- ================= ACT I: PROLOGUE & UNLOCK ================= -->
+    <section id="screen1" class="screen active min-h-screen justify-center items-center px-6 text-center max-w-4xl mx-auto py-20 z-20">
+        <div class="space-y-6">
+            <span class="text-xs font-serif-cinematic uppercase tracking-[0.4em] text-rose-500 font-bold block animate-pulse">A Personal Presentation</span>
             
-            <div class="space-y-64 text-stone-500 font-light text-base md:text-lg w-full">
-                <div>Begin sequence...</div>
-                <div class="text-rose-600 font-semibold text-xl">I'm sorryyyyy</div>
-                <div>I never wanted all of this to break, everrr.</div>
-                <div class="text-rose-600 font-semibold text-2xl">I'm sorryyyyy</div>
-                <div>Keep moving down, don't stop.</div>
-                <div class="text-rose-600 font-semibold text-3xl">I'm sorryyyyy</div>
-                <div>Bahaut bada ho gaya... (that's what she said lol)</div>
-                <div class="text-rose-600 font-semibold text-4xl">I'm sorryyyyy</div>
-                <div>Okay, only a bit more, just scroll lol...</div>
-                <div class="text-stone-300 font-medium">Tu wapas kyu nahi aayi? 😤 But it's okayyy, ek hi baat hai 😋</div>
-                <div class="text-stone-600 italic">Right at the border...</div>
-                <div class="text-stone-400">That—</div>
-                <div class="text-stone-300">That—</div>
-                <div class="text-stone-200">That—</div>
-                <div class="text-2xl text-white font-semibold tracking-wider glow-text">I really really reallyyyyy—</div>
+            <h1 class="text-3xl md:text-6xl font-serif-cinematic font-light tracking-wider text-white leading-tight">
+                I Hate This Silence, Drishya. <br>
+                <span class="italic font-serif text-rose-400 text-2xl md:text-5xl font-extralight">And I Hate This Distance.</span>
+            </h1>
+
+            <p class="mt-6 text-base md:text-lg text-stone-400 font-light leading-relaxed max-w-xl mx-auto">
+                I really like talking to you, and right now, <span class="text-stone-200 font-medium italic">mujhe ghuma firaake bhi nahi bolna...</span>
+            </p>
+
+            <div class="py-2">
+                <p class="text-3xl md:text-5xl font-handwritten text-rose-400 tracking-wide drop-shadow-[0_0_15px_rgba(244,63,94,0.3)]">
+                    I really, really, realllyyyy like you ❤️
+                </p>
             </div>
 
-            <div class="mt-64 pt-24 border-t border-stone-900 w-full">
-                <button onclick="navTo(8)" class="bg-white text-black text-xs tracking-widest uppercase font-bold py-4 px-12 rounded-full shadow-2xl hover:bg-rose-500 hover:text-white transition-all">
-                    Click to Uncover Plot Twist 🎬
+            <!-- Password Box Area -->
+            <div class="mt-8 glass-panel p-8 rounded-3xl max-w-md mx-auto w-full border border-white/10 shadow-2xl">
+                <p class="text-xs text-stone-400 uppercase tracking-widest leading-relaxed mb-6">
+                    Enter the phrase that became <span class="text-rose-400 font-semibold">"self-banned"</span> in our chats to decrypt this site.
+                </p>
+                
+                <div class="flex justify-center gap-3 mb-6">
+                    <input type="text" id="pass1" placeholder="WORD 1" class="w-28 text-center border-b-2 border-stone-700 focus:border-rose-500 outline-none py-2 text-sm uppercase tracking-widest bg-transparent text-white transition-colors">
+                    <span class="text-stone-500 font-light text-2xl">•</span>
+                    <input type="text" id="pass2" placeholder="WORD 2" class="w-28 text-center border-b-2 border-stone-700 focus:border-rose-500 outline-none py-2 text-sm uppercase tracking-widest bg-transparent text-white transition-colors">
+                </div>
+                
+                <p id="errorMsg" class="text-xs text-rose-500 font-medium h-5 mb-4"></p>
+                
+                <button onclick="checkPassword()" class="w-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-serif-cinematic tracking-[0.25em] uppercase py-4 rounded-2xl transition-all shadow-lg shadow-rose-900/30 hover:shadow-rose-600/40">
+                    Decrypt Experience →
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- SCREEN 8: THE FINALE REVEAL -->
-    <section id="layer8" class="page-layer bg-black text-center">
-        <div class="max-w-xl mx-auto px-6">
-            <span class="text-rose-500 text-xs font-semibold uppercase tracking-[0.3em] block mb-4">The Final Plot Twist</span>
-            <h3 class="text-3xl md:text-5xl font-serif italic font-medium leading-snug text-white">
-                I was <span class="underline decoration-rose-500 glow-text">never</span> planning to let you go.
-            </h3>
-            <p class="mt-6 text-stone-400 text-sm md:text-base leading-relaxed max-w-sm mx-auto">
-                It was just terrible stress, an exam breakdown, and a bad moment coming together all at once. But now the noise is completely over.
-            </p>
-            <p class="mt-6 text-xl text-rose-400 font-semibold glow-text">
-                Let's just fix this. Ok, msg me now lol ❤️
-            </p>
-            
-            <div class="mt-10">
-                <a href="https://discord.com" target="_blank" class="inline-block bg-white text-black text-xs tracking-widest uppercase font-bold py-4 px-12 rounded-full shadow-xl hover:bg-rose-500 hover:text-white transform hover:scale-105 transition-all duration-300">
-                    Text Me on Discord
-                </a>
+
+    <!-- ================= ACT II: HOW WE STARTED (FEB - APRIL) ================= -->
+    <section id="screen2" class="screen min-h-screen justify-center items-center px-6 max-w-4xl mx-auto py-24 z-20">
+        <div class="w-full text-center space-y-8">
+            <div class="space-y-2">
+                <span class="text-xs font-serif-cinematic uppercase tracking-[0.3em] text-rose-500 font-bold">Feb — April Era</span>
+                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">ACT II: THE GOLDEN ERA</h2>
+            </div>
+
+            <div class="glass-panel p-8 md:p-10 rounded-3xl text-left space-y-6 text-stone-300 leading-relaxed font-light border border-white/10 shadow-2xl">
+                <p>
+                    Since February on DC, I always noticed you—the high-energy, totally unfiltered girlie who was afraid of nothing (<span class="text-rose-300 font-handwritten text-xl">kabhi dominant, kabhi rookie, kabhi calm!</span>). But when we actually started talking in March, I discovered your sweetest side. Your care, the tea 😋, gossips, and daily stories made me feel so genuinely special.
+                </p>
+
+                <div class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/10">
+                    <span class="text-3xl">📞</span>
+                    <div>
+                        <h4 class="text-white font-medium text-base">April 7th & The 5-Hour Calls</h4>
+                        <p class="text-xs text-stone-400">Sneaking phones to text, dozing off on call, recording 5-hour calls, listening to your princess stories T-T, and calling before your dad arrived... every single good morning and good night text mattered immensely.</p>
+                    </div>
+                </div>
+
+                <p class="italic text-stone-200">
+                    I never thought I could talk to someone this much, but with you, I became a call person. Solving your trust issues? Count me signed up for life.
+                </p>
+            </div>
+
+            <div>
+                <button onclick="goToScreen(3, 'ACT III: THE SILENT BATTLES')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
+                    Next: Act III — The Silent Battles →
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- RIGID LOGIC SWITCH ENGINE -->
+
+    <!-- ================= ACT III: THE SILENT BATTLES & MISUNDERSTANDINGS (MAY - JULY) ================= -->
+    <section id="screen3" class="screen min-h-screen justify-center items-center px-6 max-w-4xl mx-auto py-24 z-20">
+        <div class="w-full text-center space-y-8">
+            <div class="space-y-2">
+                <span class="text-xs font-serif-cinematic uppercase tracking-[0.3em] text-rose-500 font-bold">May — July Truths</span>
+                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">ACT III: THE UNCONTAINED STORMS</h2>
+            </div>
+
+            <div class="glass-panel p-8 md:p-10 rounded-3xl text-left space-y-6 text-stone-300 leading-relaxed font-light border border-white/10 shadow-2xl">
+                <div class="p-6 bg-stone-900/70 border border-white/10 rounded-2xl space-y-3">
+                    <h4 class="text-rose-400 font-serif-cinematic uppercase tracking-widest text-xs font-bold">What I Suffered Silently (Post-JEE)</h4>
+                    <p class="text-sm text-stone-300">
+                        After May 26th, post-JEE depression and college result expectations crushed me. I was waking up crying silently, trying my best not to show it to you. <span class="text-rose-300 font-medium">You were literally the ONLY positive anchor in my entire month of June.</span>
+                    </p>
+                </div>
+
+                <p>
+                    I planned to surprise you in Mumbai on your trip, give you a real gift, and present this website live (<span class="text-rose-300 italic">you have no idea how many coding glitches I fought through to build this!</span>). But when the plan failed, I was heartbroken.
+                </p>
+
+                <div class="p-5 bg-rose-950/30 border border-rose-500/30 rounded-2xl text-xs space-y-2">
+                    <span class="text-rose-400 font-bold uppercase tracking-widest block">Clearing That "Workout Break" Misunderstanding 😭</span>
+                    <p class="text-stone-300">I literally did NOT know what it actually meant! I Googled it randomly and mentioned it purely out of care. Kasam se mujhe pata tak nahi tha yawrrr 🥺!</p>
+                </div>
+            </div>
+
+            <div>
+                <button onclick="goToScreen(4, 'ACT IV: THE ARCHIVES & BLUEPRINT')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
+                    Next: Act IV — Archives & Blueprint →
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= ACT IV: THE ARCHIVES & HER BLUEPRINT ================= -->
+    <section id="screen4" class="screen min-h-screen justify-center items-center px-6 max-w-5xl mx-auto py-24 z-20">
+        <div class="w-full text-center space-y-12">
+            <div class="space-y-2">
+                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">ACT IV: ARCHIVES & BLUEPRINT</h2>
+                <p class="text-xs text-rose-500 uppercase tracking-[0.3em] font-semibold">Decrypted letters & tiny specifics</p>
+            </div>
+
+            <!-- Blueprint Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+                <div class="glass-card p-5 rounded-2xl text-center space-y-2">
+                    <div class="text-3xl">🌹</div>
+                    <p class="text-[10px] font-serif-cinematic uppercase tracking-widest text-rose-400 font-bold">Flowers</p>
+                    <p class="text-xs font-light text-stone-300">Red/Pink Roses & Baby's Breath</p>
+                </div>
+                <div class="glass-card p-5 rounded-2xl text-center space-y-2">
+                    <div class="text-3xl">🐕</div>
+                    <p class="text-[10px] font-serif-cinematic uppercase tracking-widest text-rose-400 font-bold">Mascot</p>
+                    <p class="text-xs font-light text-stone-300">Shih Tzus (Cute & dramatic)</p>
+                </div>
+                <div class="glass-card p-5 rounded-2xl text-center space-y-2">
+                    <div class="text-3xl">🌶️</div>
+                    <p class="text-[10px] font-serif-cinematic uppercase tracking-widest text-rose-400 font-bold">Craving</p>
+                    <p class="text-xs font-light text-stone-300">Panipuri craving, always</p>
+                </div>
+                <div class="glass-card p-5 rounded-2xl text-center space-y-2">
+                    <div class="text-3xl">🍧</div>
+                    <p class="text-[10px] font-serif-cinematic uppercase tracking-widest text-rose-400 font-bold">Dessert</p>
+                    <p class="text-xs font-light text-stone-300">Rasmalai. Non-negotiable.</p>
+                </div>
+            </div>
+
+            <!-- Interactive Letters Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+                <div onclick="openLetter(1)" class="glass-card p-5 rounded-2xl cursor-pointer group flex justify-between items-center">
+                    <div>
+                        <span class="text-[9px] font-serif-cinematic text-rose-500 block">LETTER 01</span>
+                        <h4 class="text-sm text-stone-200 group-hover:text-white">Taking the Lead</h4>
+                    </div>
+                    <span>📁</span>
+                </div>
+                <div onclick="openLetter(2)" class="glass-card p-5 rounded-2xl cursor-pointer group flex justify-between items-center">
+                    <div>
+                        <span class="text-[9px] font-serif-cinematic text-rose-500 block">LETTER 02</span>
+                        <h4 class="text-sm text-stone-200 group-hover:text-white">Support & Convos</h4>
+                    </div>
+                    <span>📁</span>
+                </div>
+                <div onclick="openLetter(3)" class="glass-card p-5 rounded-2xl cursor-pointer group flex justify-between items-center">
+                    <div>
+                        <span class="text-[9px] font-serif-cinematic text-rose-500 block">LETTER 03</span>
+                        <h4 class="text-sm text-stone-200 group-hover:text-white">Silence & Impact</h4>
+                    </div>
+                    <span>📁</span>
+                </div>
+            </div>
+
+            <div>
+                <button onclick="goToScreen(5, 'ACT V: RESET & THE PROMISE')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
+                    Next: Act V — Reset & The Promise →
+                </button>
+            </div>
+        </div>
+
+        <!-- Dynamic Modal -->
+        <div id="letterModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden justify-center items-center p-4">
+            <div class="glass-panel max-w-xl w-full rounded-3xl p-8 border border-white/10 shadow-2xl max-h-[80vh] overflow-y-auto relative">
+                <button onclick="closeModal()" class="absolute top-6 right-6 text-stone-400 hover:text-white text-2xl font-light">&times;</button>
+                <div id="modalContent" class="text-stone-300 leading-relaxed text-base md:text-lg space-y-4"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= ACT V: AURANGABAD RESET & MANNING UP ================= -->
+    <section id="screen5" class="screen min-h-screen justify-center items-center px-6 max-w-4xl mx-auto py-24 z-20">
+        <div class="w-full text-center space-y-8">
+            <div class="space-y-2">
+                <span class="text-xs font-serif-cinematic uppercase tracking-[0.3em] text-rose-500 font-bold">Clarity & Accountability</span>
+                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">ACT V: MANNING UP</h2>
+            </div>
+
+            <div class="glass-panel p-8 md:p-10 rounded-3xl text-left space-y-6 text-stone-300 leading-relaxed font-light border border-white/10 shadow-2xl">
+                <p>
+                    My recent trip to Aurangabad—trekking, playing football and cricket with 15 friends—finally helped me step out of my dark slump and reset my mind.
+                </p>
+
+                <p>
+                    I admit my flaws 100%. When college started early, I got inconsistent, deactivated my account, and missed proposing on Girlfriend's Day like I planned. <span class="text-rose-300 font-medium">Intent alone means nothing if I don't show up properly, and I accept that.</span>
+                </p>
+
+                <div class="p-6 bg-rose-950/30 border border-rose-500/30 rounded-2xl text-center space-y-2">
+                    <p class="text-rose-300 font-handwritten text-3xl">"I am ready to man up, take the lead, and bridge this detachment."</p>
+                    <p class="text-xs text-stone-400">Efforts will be the LAST thing you'll ever complain about again. I promise you, pakka.</p>
+                </div>
+
+                <!-- Oath Box -->
+                <div class="p-6 bg-white/5 border border-white/10 rounded-2xl text-center space-y-3">
+                    <span class="text-[10px] font-serif-cinematic font-bold uppercase text-rose-400 tracking-[0.2em]">Solemn Oath</span>
+                    <p class="text-sm text-stone-200 font-light">Do you promise to NEVER block me again when things get rough?</p>
+                    <div class="flex gap-3 justify-center">
+                        <button onclick="answerOath(true)" class="text-xs font-serif-cinematic tracking-wider py-2.5 px-6 border border-rose-500/50 rounded-xl hover:bg-rose-500/20 transition-all text-rose-300 font-bold">I Promise ❤️</button>
+                        <button onclick="answerOath(false)" class="text-xs font-serif-cinematic tracking-wider py-2.5 px-6 border border-white/10 rounded-xl hover:bg-white/5 transition-all text-stone-500">I need to think...</button>
+                    </div>
+                    <p id="oathFeedback" class="text-xs font-medium h-4"></p>
+                </div>
+            </div>
+
+            <div>
+                <button onclick="goToScreen(6, 'ACT VI: THE FINALE')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
+                    Proceed to Act VI: The Finale →
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= ACT VI: POST-CREDITS FINALE & 5201314 REVEAL ================= -->
+    <section id="screen6" class="screen min-h-screen justify-start items-center py-28 px-6 z-20">
+        <div class="max-w-2xl text-center flex flex-col items-center mx-auto">
+            <h2 class="text-rose-500 font-serif-cinematic tracking-[0.4em] text-xs uppercase font-bold mb-4 animate-pulse">Post-Credits Scene</h2>
+            <p class="text-stone-500 font-serif-cinematic tracking-[0.2em] text-[10px] uppercase mb-20">Scroll down slowly...</p>
+            
+            <div class="space-y-44 text-stone-400 font-light text-lg">
+                <div class="text-stone-600">If you made it here and you're still reading... I'm so glad.</div>
+                <div class="text-rose-500 font-serif-cinematic tracking-widest text-xl">I'm sorryyyyy</div>
+                <div class="text-stone-400">Your cute laugh that day on call... omg, that was so special.</div>
+                <div class="text-rose-500 font-serif-cinematic tracking-widest text-2xl">I'm sorryyyyy</div>
+                <div class="text-stone-400">Bahaut bada hogaya text 😭 (That's what she said lol!)</div>
+                <div class="text-rose-500 font-serif-cinematic tracking-widest text-3xl">I'm sorryyyyy</div>
+                <div class="text-stone-400">Tu wapas kyu nahi aayi 😤... drop the ego now 😋</div>
+                <div class="text-stone-500 text-sm">Almost at the secret code...</div>
+            </div>
+
+            <!-- The Big Reveal Trigger -->
+            <div class="mt-64 pt-24 border-t border-stone-800/80 w-full space-y-8">
+                <span class="text-rose-500 text-[10px] font-serif-cinematic font-bold uppercase tracking-[0.4em] block">The Plot Twist</span>
+                
+                <h3 class="text-3xl md:text-5xl font-serif-cinematic leading-snug text-white font-light">
+                    I was <span class="underline decoration-rose-500 underline-offset-8">never</span> planning to let you go.
+                </h3>
+                
+                <p class="text-stone-400 text-sm max-w-md mx-auto leading-relaxed font-light">
+                    Where there's a will, there's a way. College starting won't change us. Let's fix this properly now.
+                </p>
+
+                <!-- Secret Code Box -->
+                <div class="glass-panel p-6 rounded-2xl max-w-sm mx-auto border border-rose-500/30 space-y-3">
+                    <span class="text-3xl font-serif-cinematic tracking-widest text-white font-bold block">5201314</span>
+                    <button onclick="decodeSecret()" id="decodeBtn" class="text-xs text-rose-400 hover:text-rose-300 font-serif-cinematic tracking-wider uppercase underline">
+                        Click to Decode Secret Code
+                    </button>
+                    <p id="decodedMsg" class="text-xl font-handwritten text-rose-300 h-6"></p>
+                </div>
+                
+                <div class="py-6 space-y-3 font-serif-cinematic tracking-widest text-stone-300 text-sm">
+                    <p>Sooo, yeaaaa Drishyaaa...</p>
+                    <p class="text-xs text-stone-500">Overall, just wanted to say that—</p>
+                    <p class="text-rose-400 animate-pulse">That—</p>
+                    <p class="text-rose-400 animate-pulse">That—</p>
+                </div>
+                
+                <div>
+                    <a href="https://discord.com" target="_blank" class="inline-block bg-white text-black text-xs font-serif-cinematic tracking-[0.25em] uppercase font-bold py-5 px-12 rounded-full shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:bg-rose-600 hover:text-white transition-all duration-500 transform hover:scale-105">
+                        Ok, Text / DM Me Now ❤️
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- JAVASCRIPT ENGINE -->
     <script>
-        // Immutably organized note dataset with clean highlights
-        var narrativeTexts = {
-            1: `<span class="text-xs font-semibold text-rose-400 uppercase tracking-wider block mb-2">Note 01 · Taking Control</span>
-                <p>Until now, I think I <span class="text-white font-semibold underline decoration-rose-400">never took the lead in this relationship</span> because I was kinda scared, but now, <span class="text-white font-semibold">I really want to take the lead</span>.</p>
-                <p class="mt-3">But now that I'm kinda free from exams, I now feel good about this when I think all of it ❤️</p>`,
+        /* CANVAS STARFIELD BACKGROUND EFFECT */
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, stars = [];
+
+        function initCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            stars = [];
+            for (let i = 0; i < 120; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 1.5,
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.005 + 0.002
+                });
+            }
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, width, height);
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+                ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha) * 0.7})`;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(drawStars);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        drawStars();
+
+        /* AUDIO SYNTH FOR CLICK SOUNDS */
+        function playTone(freq, type = 'sine', duration = 0.1) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        /* DATA & NAVIGATION ENGINE */
+        const letterData = {
+            1: `<h4 class="text-xs uppercase font-serif-cinematic font-bold text-rose-500 tracking-widest mb-3">Letter 01</h4>
+                <p>Until now, I think I <span class="bg-rose-900/40 text-rose-200 font-medium px-1.5 py-0.5 rounded">never took the lead in this relationship</span> because I was kinda scared. But right now, <span class="text-white font-medium">I really want to take the lead</span>.</p>
+                <p>Now that I'm free from exams, I feel incredibly good about this whole thing when I sit down and think about all of it. ❤️</p>`,
                 
-            2: `<span class="text-xs font-semibold text-rose-400 uppercase tracking-wider block mb-2">Note 02 · Unveiling Comfort</span>
-                <p>I really was unsure on how to talk with you, but <span class="text-rose-300 font-medium">you really made it easy to talk, validated me, even supported me...</span></p>
-                <p class="mt-3">I discovered a completely different side of you, your nature, your care, the way you discussed it out—everything with me, even the tea 😋, gossips, even about you, I really felt special. I really love the side of you when you aren't afraid to communicate.</p>`,
+            2: `<h4 class="text-xs uppercase font-serif-cinematic font-bold text-rose-500 tracking-widest mb-3">Letter 02</h4>
+                <p>I really was unsure on how to talk with you at first, but <span class="bg-rose-900/40 text-rose-200 font-medium px-1.5 py-0.5 rounded">you really made it easy to talk</span>. You validated me, you even supported me...</p>
+                <p>I really, <span class="text-white font-medium">really love that side of you</span>, especially when you aren't afraid to communicate.</p>`,
                 
-            3: `<span class="text-xs font-semibold text-rose-400 uppercase tracking-wider block mb-2">Note 03 · The Terrible Night</span>
-                <p>Even when we got into our last Convo, <span class="text-white font-medium underline decoration-rose-400">I came into it as a discussion, never ever to end it...</span> I never had intentions to end it and never will.</p>
-                <p class="mt-3">Firr, jab mai already breakdown me tha, idk, things just escalated quickly, aur firr I said things, and started pointing out things which didn't even exist, or even idk. And when you actually said that <span class="text-red-400 font-semibold">"I'm done,"</span> that <span class="font-semibold text-white">hurt me in my heart</span>, and I can't even express how much. I couldn't sleep that night, hence spammed msgs on all of your accs.</p>`,
-                
-            4: `<span class="text-xs font-semibold text-rose-400 uppercase tracking-wider block mb-2">Note 04 · The Weight of Absence</span>
-                <p>When I woke up and saw your msg regarding a break, I still felt okay... even about the call, <span class="text-rose-300 font-medium">I just wanted to confirm or propose to you</span>, as my exams and overall everything was done.</p>
-                <p class="mt-3">But then when you blocked me, <span class="text-white font-semibold tracking-wide">this silence, it really bites 😔</span>, and as far as I know 
+            3: `<h4 class="text-xs uppercase font-serif-cinematic font-bold text-rose-500 tracking-widest mb-3">Letter 03</h4>
+                <p>Even when we got into our last convo, <span class="bg-white/10 text-stone-200 font-medium px-1.5 py-0.5 rounded">I came into it as a discussion, never ever to end it</span>. When you blocked me, <span class="bg-rose-900/40 text-rose-200 font-medium px-1.5 py-0.5 rounded">this silence, it really bites 😔</span>. Breaks like these just make us feel how important the person actually was.</p>`
+        };
+
+        function goToScreen(screenNumber, chapterName) {
+            playTone(440, 'sine', 0.15);
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            const targetScreen = document.getElementById('screen' + screenNumber);
+            targetScreen.classList.add('active');
+            
+            if(chapterName) {
+                document.getElementById('chapterTitle').innerText = chapterName;
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function triggerConfetti() {
+            var count = 200;
+            var defaults = { origin: { y: 0.7 } };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            fire(0.25, { spread: 26, startVelocity: 55, colors: ['#f43f5e', '#fb7185'] });
+            fire(0.2, { spread: 60, colors: ['#fda4af', '#f43f5e'] });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+        }
+
+        function checkPassword() {
+            const w1 = document.getElementById('pass1').value.trim().toLowerCase();
+            const w2 = document.getElementById('pass2').value.trim().toLowerCase();
+            const error = document.getElementById('errorMsg');
+            
+            if (w1 === "sahi" && w2 === "hai") {
+                error.innerText = "";
+                playTone(880, 'sine', 0.3);
+                triggerConfetti();
+                setTimeout(() => goToScreen(2, 'ACT II: THE GOLDEN ERA'), 1000);
+            } else if (w1 === "bhai" || w2 === "bhai") {
+                playTone(150, 'sawtooth', 0.2);
+                error.innerText = "Literally offensive. Try again. 😤";
+            } else if (w1 === "" || w2 === "") {
+                playTone(200, 'square', 0.1);
+                error.innerText = "Fill both boxes!";
+            } else {
+                playTone(200, 'square', 0.1);
+                error.innerText = "Incorrect phrase. Think about what got banned.";
+            }
+        }
+
+        function openLetter(id) {
+            playTone(600, 'sine', 0.1);
+            const modal = document.getElementById('letterModal');
+            const content = document.getElementById('modalContent');
+            
+            content.innerHTML = letterData[id];
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            playTone(300, 'sine', 0.1);
+            const modal = document.getElementById('letterModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function toggleMusic() {
+            const audio = document.getElementById('bgMusic');
+            const status = document.getElementById('musicStatus');
+            const icon = document.getElementById('musicIcon');
+            
+            if (audio.paused) {
+                audio.play();
+                status.innerText = "Playing Score";
+                icon.innerText = "⏸️";
+            } else {
+                audio.pause();
+                status.innerText = "Cinematic Score";
+                icon.innerText = "🎵";
+            }
+        }
+
+        function answerOath(isCorrect) {
+            const feedback = document.getElementById('oathFeedback');
+            if(isCorrect) {
+                playTone(700, 'sine', 0.2);
+                triggerConfetti();
+                feedback.className = "text-xs mt-2 font-medium text-emerald-400";
+                feedback.innerText = "Oath sealed! Communication wins forever. ❤️";
+            } else {
+                playTone(180, 'sawtooth', 0.2);
+                feedback.className = "text-xs mt-2 font-medium text-rose-400";
+                feedback.innerText = "Wrong option! Click 'I Promise' 👀";
+            }
+        }
+
+        function decodeSecret() {
+            playTone(880, 'sine', 0.3);
+            triggerConfetti();
+            document.getElementById('decodedMsg').innerText = "It means: I LOVE YOU ❤️";
+        }
+    </script>
+</body>
+</html>
+    
