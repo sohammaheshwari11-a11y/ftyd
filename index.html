@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Drishya | An Interactive Story ❤️</title>
+    <title>For Drishya ❤️</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Canvas Confetti CDN -->
@@ -97,22 +97,22 @@
     <div class="fixed top-8 right-8 z-50 flex items-center gap-3 glass-panel px-4 py-2.5 rounded-full border border-white/10 shadow-2xl">
         <button id="musicToggle" onclick="toggleMusic()" class="flex items-center gap-2 focus:outline-none group">
             <span id="musicIcon" class="text-rose-400 group-hover:scale-110 transition-transform">🎵</span>
-            <span id="musicStatus" class="text-[11px] uppercase tracking-widest text-stone-300 font-semibold">Cinematic Score</span>
+            <span id="musicStatus" class="text-[11px] uppercase tracking-widest text-stone-300 font-semibold">Background Music</span>
         </button>
         <audio id="bgMusic" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=sad-soul-112330.mp3"></audio>
     </div>
 
-    <!-- ACT HEADER INDICATOR -->
+    <!-- HEADER INDICATOR -->
     <div class="fixed top-8 left-8 z-50 flex items-center gap-2 glass-panel px-4 py-2 rounded-full border border-white/10">
         <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-        <span id="chapterTitle" class="text-[10px] font-serif-cinematic uppercase tracking-[0.2em] text-stone-300">ACT I: THE UNLOCK</span>
+        <span id="chapterTitle" class="text-[10px] font-serif-cinematic uppercase tracking-[0.2em] text-stone-300">PART I: THE PASSCODE</span>
     </div>
 
 
-    <!-- ================= ACT I: PROLOGUE & UNLOCK ================= -->
+    <!-- ================= SCREEN 1: PROLOGUE & UNLOCK ================= -->
     <section id="screen1" class="screen active min-h-screen justify-center items-center px-6 text-center max-w-4xl mx-auto py-20 z-20">
         <div class="space-y-6">
-            <span class="text-xs font-serif-cinematic uppercase tracking-[0.4em] text-rose-500 font-bold block animate-pulse">A Personal Presentation</span>
+            <span class="text-xs font-serif-cinematic uppercase tracking-[0.4em] text-rose-500 font-bold block animate-pulse">A Letter From Me</span>
             
             <h1 class="text-3xl md:text-6xl font-serif-cinematic font-light tracking-wider text-white leading-tight">
                 I Hate This Silence, Drishya. <br>
@@ -132,7 +132,7 @@
             <!-- Password Box Area -->
             <div class="mt-8 glass-panel p-8 rounded-3xl max-w-md mx-auto w-full border border-white/10 shadow-2xl">
                 <p class="text-xs text-stone-400 uppercase tracking-widest leading-relaxed mb-6">
-                    Enter the phrase that became <span class="text-rose-400 font-semibold">"self-banned"</span> in our chats to decrypt this site.
+                    Enter the phrase that became <span class="text-rose-400 font-semibold">"self-banned"</span> in our chats to unlock.
                 </p>
                 
                 <div class="flex justify-center gap-3 mb-6">
@@ -144,89 +144,95 @@
                 <p id="errorMsg" class="text-xs text-rose-500 font-medium h-5 mb-4"></p>
                 
                 <button onclick="checkPassword()" class="w-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-serif-cinematic tracking-[0.25em] uppercase py-4 rounded-2xl transition-all shadow-lg shadow-rose-900/30 hover:shadow-rose-600/40">
-                    Decrypt Experience →
+                    Unlock →
                 </button>
             </div>
         </div>
     </section>
 
 
-    <!-- ================= ACT II: HOW WE STARTED (FEB - APRIL) ================= -->
+    <!-- ================= SCREEN 2: FEB — APRIL DETAILED ERA ================= -->
     <section id="screen2" class="screen min-h-screen justify-center items-center px-6 max-w-4xl mx-auto py-24 z-20">
         <div class="w-full text-center space-y-8">
             <div class="space-y-2">
                 <span class="text-xs font-serif-cinematic uppercase tracking-[0.3em] text-rose-500 font-bold">Feb — April Era</span>
-                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">ACT II: THE GOLDEN ERA</h2>
+                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">PART II: HOW IT ALL BEGAN</h2>
             </div>
 
             <div class="glass-panel p-8 md:p-10 rounded-3xl text-left space-y-6 text-stone-300 leading-relaxed font-light border border-white/10 shadow-2xl">
                 <p>
-                    Since February on DC, I always noticed you—the high-energy, totally unfiltered girlie who was afraid of nothing (<span class="text-rose-300 font-handwritten text-xl">kabhi dominant, kabhi rookie, kabhi calm!</span>). But when we actually started talking in March, I discovered your sweetest side. Your care, the tea 😋, gossips, and daily stories made me feel so genuinely special.
+                    We started talking around March, and bro... <span class="text-white font-medium underline decoration-rose-500/50">I have NEVER felt so good and comfortable talking to someone</span>. Ever. Since February, when I got active on Discord, I always noticed you—the high-energy, unfiltered girlie who was afraid of nothing (<span class="text-rose-300 font-handwritten text-xl">kabhi dominant, kabhi rookie, kabhi calm!</span>). But when I actually talked to you, I discovered a completely different side. Your sweet nature, your care, the tea 😋, gossips, and daily stories made me feel so genuinely special.
                 </p>
 
-                <div class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/10">
-                    <span class="text-3xl">📞</span>
-                    <div>
-                        <h4 class="text-white font-medium text-base">April 7th & The 5-Hour Calls</h4>
-                        <p class="text-xs text-stone-400">Sneaking phones to text, dozing off on call, recording 5-hour calls, listening to your princess stories T-T, and calling before your dad arrived... every single good morning and good night text mattered immensely.</p>
-                    </div>
+                <div class="p-6 bg-rose-950/20 border border-rose-500/20 rounded-2xl space-y-3">
+                    <h4 class="text-rose-400 font-serif-cinematic uppercase tracking-widest text-xs font-bold">📞 April 7th — Falling For You</h4>
+                    <p class="text-sm text-stone-200 leading-relaxed">
+                        When I first talked to you on call on the 7th of April, I had no idea I was gonna get this attached. As the days went by, I could feel myself slowly falling for you. I think about you all the time—from the moment I wake up to the moment I fall asleep.
+                    </p>
+                    <p class="text-sm text-stone-200 leading-relaxed">
+                        I know for a fact we are meant for each other. Just know I will never let go of you and my feelings will never disappear. I wish I was able to explain how wonderful you are to me... how the sound of your voice gives me butterflies, how hearing your laugh makes me smile. I wish I could also tell you how much I love you, but you leave me loss for words. Even if I put the words together, it wouldn't come anywhere near showing how much you mean to me. I may not be the most perfect guy lol, but of course I'll hold on to this and put in the effort.
+                    </p>
                 </div>
 
-                <p class="italic text-stone-200">
-                    I never thought I could talk to someone this much, but with you, I became a call person. Solving your trust issues? Count me signed up for life.
+                <p class="text-xs text-stone-400 leading-relaxed">
+                    Remember when I accidentally slept off once, and you spammed messages across all my accounts just to check if I felt bad? Awww 🥰! Then came the week we talked on call every day—even recorded a 5-hour call 😭😭! Always 3+ hours, calling before your dad arrived, talking till 11:30 PM. Good morning and good night texts mattered so much—even a single letter less literally mattered to me. Watching you learn guitar, journal, and tell me princess stories T-T... crazy how we never ran out of topics. Count me signed up to solve your trust issues for life.
                 </p>
             </div>
 
             <div>
-                <button onclick="goToScreen(3, 'ACT III: THE SILENT BATTLES')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
-                    Next: Act III — The Silent Battles →
+                <button onclick="goToScreen(3, 'PART III: THE SILENT BATTLES')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
+                    Next: Part III — The Silent Battles →
                 </button>
             </div>
         </div>
     </section>
 
 
-    <!-- ================= ACT III: THE SILENT BATTLES & MISUNDERSTANDINGS (MAY - JULY) ================= -->
+    <!-- ================= SCREEN 3: MAY — JULY DETAILED ERA ================= -->
     <section id="screen3" class="screen min-h-screen justify-center items-center px-6 max-w-4xl mx-auto py-24 z-20">
         <div class="w-full text-center space-y-8">
             <div class="space-y-2">
                 <span class="text-xs font-serif-cinematic uppercase tracking-[0.3em] text-rose-500 font-bold">May — July Truths</span>
-                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">ACT III: THE UNCONTAINED STORMS</h2>
+                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">PART III: THE UNCONTAINED STORMS</h2>
             </div>
 
             <div class="glass-panel p-8 md:p-10 rounded-3xl text-left space-y-6 text-stone-300 leading-relaxed font-light border border-white/10 shadow-2xl">
                 <div class="p-6 bg-stone-900/70 border border-white/10 rounded-2xl space-y-3">
-                    <h4 class="text-rose-400 font-serif-cinematic uppercase tracking-widest text-xs font-bold">What I Suffered Silently (Post-JEE)</h4>
-                    <p class="text-sm text-stone-300">
-                        After May 26th, post-JEE depression and college result expectations crushed me. I was waking up crying silently, trying my best not to show it to you. <span class="text-rose-300 font-medium">You were literally the ONLY positive anchor in my entire month of June.</span>
+                    <h4 class="text-rose-400 font-serif-cinematic uppercase tracking-widest text-xs font-bold">Post-JEE Depression & Silent Cries</h4>
+                    <p class="text-sm text-stone-300 leading-relaxed">
+                        My exams finished on May 26th. What you didn't know was post-JEE results, college expectations, and pressure pushed me into deep depression. I used to wake up and cry silently, trying my best not to show it to you. <span class="text-rose-300 font-medium">You were literally the ONLY positive thing happening to me in the entire month of June.</span> You held me up when everything was falling apart.
                     </p>
                 </div>
 
                 <p>
-                    I planned to surprise you in Mumbai on your trip, give you a real gift, and present this website live (<span class="text-rose-300 italic">you have no idea how many coding glitches I fought through to build this!</span>). But when the plan failed, I was heartbroken.
+                    When you told me about your Mumbai trip, I planned to surprise you on our first meet, give you a real gift, and present this website live (<span class="text-rose-300 italic">you have NO idea how many painful coding glitches this site went through!</span>). When that plan fell through, I was heartbroken.
                 </p>
 
                 <div class="p-5 bg-rose-950/30 border border-rose-500/30 rounded-2xl text-xs space-y-2">
-                    <span class="text-rose-400 font-bold uppercase tracking-widest block">Clearing That "Workout Break" Misunderstanding 😭</span>
-                    <p class="text-stone-300">I literally did NOT know what it actually meant! I Googled it randomly and mentioned it purely out of care. Kasam se mujhe pata tak nahi tha yawrrr 🥺!</p>
+                    <span class="text-rose-400 font-bold uppercase tracking-widest block">The "Workout Break" Misunderstanding 😭</span>
+                    <p class="text-stone-300">I literally did NOT know what it actually meant! I Googled it randomly and was just talking about it out of care. Kasam se mujhe pata tak nahi tha yawrrr 🥺! When I realized what it meant on our final argument day, I knew anyone would feel grossed out, but swear on everything, I was completely clueless!</p>
                 </div>
+
+                <p class="text-xs text-stone-400 italic">
+                    When you blocked me in early July while I was traveling, I was devastated. College decisions were a shock to me, but my trip to Aurangabad—trekking, playing football and cricket with 15 friends—finally helped me reset and gather courage to say all of this.
+                </p>
             </div>
 
             <div>
-                <button onclick="goToScreen(4, 'ACT IV: THE ARCHIVES & BLUEPRINT')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
-                    Next: Act IV — Archives & Blueprint →
+                <button onclick="goToScreen(4, 'PART IV: ARCHIVES & BLUEPRINT')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
+                    Next: Part IV — Archives & Blueprint →
                 </button>
             </div>
         </div>
     </section>
 
 
-    <!-- ================= ACT IV: THE ARCHIVES & HER BLUEPRINT ================= -->
+    <!-- ================= SCREEN 4: ARCHIVES & HER BLUEPRINT ================= -->
     <section id="screen4" class="screen min-h-screen justify-center items-center px-6 max-w-5xl mx-auto py-24 z-20">
-        <div class="w-full text-center space-y-12">
+        <div class="w-full text-center space-y-10">
             <div class="space-y-2">
-                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">ACT IV: ARCHIVES & BLUEPRINT</h2>
-                <p class="text-xs text-rose-500 uppercase tracking-[0.3em] font-semibold">Decrypted letters & tiny specifics</p>
+                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">PART IV: ARCHIVES & BLUEPRINT</h2>
+                <p class="text-xs text-rose-500 uppercase tracking-[0.3em] font-semibold">Specific details & decrypted letters</p>
             </div>
 
             <!-- Blueprint Grid -->
@@ -279,8 +285,8 @@
             </div>
 
             <div>
-                <button onclick="goToScreen(5, 'ACT V: RESET & THE PROMISE')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
-                    Next: Act V — Reset & The Promise →
+                <button onclick="goToScreen(5, 'PART V: THE ABSOLUTE BADDIE')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
+                    Next: Part V — The Absolute Baddie ✨ →
                 </button>
             </div>
         </div>
@@ -295,50 +301,69 @@
     </section>
 
 
-    <!-- ================= ACT V: AURANGABAD RESET & MANNING UP ================= -->
-    <section id="screen5" class="screen min-h-screen justify-center items-center px-6 max-w-4xl mx-auto py-24 z-20">
+    <!-- ================= SCREEN 5: THE ABSOLUTE BADDIE GALLERY ================= -->
+    <section id="screen5" class="screen min-h-screen justify-center items-center px-6 max-w-5xl mx-auto py-24 z-20">
         <div class="w-full text-center space-y-8">
             <div class="space-y-2">
-                <span class="text-xs font-serif-cinematic uppercase tracking-[0.3em] text-rose-500 font-bold">Clarity & Accountability</span>
-                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">ACT V: MANNING UP</h2>
+                <span class="text-xs font-serif-cinematic uppercase tracking-[0.3em] text-rose-500 font-bold">Pure Appreciation</span>
+                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">PART V: THE ABSOLUTE BADDIE</h2>
             </div>
 
-            <div class="glass-panel p-8 md:p-10 rounded-3xl text-left space-y-6 text-stone-300 leading-relaxed font-light border border-white/10 shadow-2xl">
-                <p>
-                    My recent trip to Aurangabad—trekking, playing football and cricket with 15 friends—finally helped me step out of my dark slump and reset my mind.
-                </p>
+            <p class="text-stone-300 text-sm font-light max-w-xl mx-auto leading-relaxed">
+                Honestly, look at you... <span class="text-rose-300 font-medium">How could I ever lose a baddie like you?</span> Literally ethereal. Your vibe, your smile, your unmatched energy—you are one of a kind, Drishya.
+            </p>
 
-                <p>
-                    I admit my flaws 100%. When college started early, I got inconsistent, deactivated my account, and missed proposing on Girlfriend's Day like I planned. <span class="text-rose-300 font-medium">Intent alone means nothing if I don't show up properly, and I accept that.</span>
-                </p>
-
-                <div class="p-6 bg-rose-950/30 border border-rose-500/30 rounded-2xl text-center space-y-2">
-                    <p class="text-rose-300 font-handwritten text-3xl">"I am ready to man up, take the lead, and bridge this detachment."</p>
-                    <p class="text-xs text-stone-400">Efforts will be the LAST thing you'll ever complain about again. I promise you, pakka.</p>
+            <!-- Photo Gallery Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl mx-auto">
+                <div class="glass-card p-3 rounded-2xl space-y-3 transform hover:scale-105 transition-all">
+                    <div class="h-64 w-full rounded-xl overflow-hidden bg-stone-900 border border-white/10">
+                        <img src="photo1.jpg" alt="Drishya" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-xs font-serif-cinematic text-rose-300 tracking-wider">Unmatched Energy ✨</p>
                 </div>
 
-                <!-- Oath Box -->
-                <div class="p-6 bg-white/5 border border-white/10 rounded-2xl text-center space-y-3">
+                <div class="glass-card p-3 rounded-2xl space-y-3 transform hover:scale-105 transition-all">
+                    <div class="h-64 w-full rounded-xl overflow-hidden bg-stone-900 border border-white/10">
+                        <img src="photo2.jpg" alt="Drishya" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-xs font-serif-cinematic text-rose-300 tracking-wider">The Cute Baddie 💅</p>
+                </div>
+
+                <div class="glass-card p-3 rounded-2xl space-y-3 transform hover:scale-105 transition-all">
+                    <div class="h-64 w-full rounded-xl overflow-hidden bg-stone-900 border border-white/10">
+                        <img src="photo3.jpg" alt="Drishya" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-xs font-serif-cinematic text-rose-300 tracking-wider">Pyaar Tera Hi Aaunda Ae ❤️</p>
+                </div>
+            </div>
+
+            <!-- Oath & Accountability Box -->
+            <div class="glass-panel p-6 rounded-3xl max-w-xl mx-auto text-left space-y-4 border border-rose-500/30">
+                <p class="text-xs text-stone-300 leading-relaxed">
+                    Intent alone means nothing if I don't show up properly. I was over-invested because <span class="text-rose-300 font-medium">the guy loves more</span>. I am ready to man up, take the lead, and bridge this detachment. Efforts will be the LAST thing you'll ever complain about again. Promise.
+                </p>
+
+                <div class="p-4 bg-white/5 border border-white/10 rounded-2xl text-center space-y-2">
                     <span class="text-[10px] font-serif-cinematic font-bold uppercase text-rose-400 tracking-[0.2em]">Solemn Oath</span>
-                    <p class="text-sm text-stone-200 font-light">Do you promise to NEVER block me again when things get rough?</p>
-                    <div class="flex gap-3 justify-center">
-                        <button onclick="answerOath(true)" class="text-xs font-serif-cinematic tracking-wider py-2.5 px-6 border border-rose-500/50 rounded-xl hover:bg-rose-500/20 transition-all text-rose-300 font-bold">I Promise ❤️</button>
-                        <button onclick="answerOath(false)" class="text-xs font-serif-cinematic tracking-wider py-2.5 px-6 border border-white/10 rounded-xl hover:bg-white/5 transition-all text-stone-500">I need to think...</button>
+                    <p class="text-xs text-stone-200 font-light">Do you promise to NEVER block me again when things get rough?</p>
+                    <div class="flex gap-3 justify-center pt-1">
+                        <button onclick="answerOath(true)" class="text-xs font-serif-cinematic tracking-wider py-2 px-5 border border-rose-500/50 rounded-xl hover:bg-rose-500/20 transition-all text-rose-300 font-bold">I Promise ❤️</button>
+                        <button onclick="answerOath(false)" class="text-xs font-serif-cinematic tracking-wider py-2 px-5 border border-white/10 rounded-xl hover:bg-white/5 transition-all text-stone-500">I need to think...</button>
                     </div>
                     <p id="oathFeedback" class="text-xs font-medium h-4"></p>
                 </div>
             </div>
 
             <div>
-                <button onclick="goToScreen(6, 'ACT VI: THE FINALE')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
-                    Proceed to Act VI: The Finale →
+                <button onclick="goToScreen(6, 'PART VI: THE FINALE')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
+                    Proceed to Part VI: The Finale →
                 </button>
             </div>
         </div>
     </section>
 
 
-    <!-- ================= ACT VI: POST-CREDITS FINALE & 5201314 REVEAL ================= -->
+    <!-- ================= SCREEN 6: POST-CREDITS FINALE & 5201314 REVEAL ================= -->
     <section id="screen6" class="screen min-h-screen justify-start items-center py-28 px-6 z-20">
         <div class="max-w-2xl text-center flex flex-col items-center mx-auto">
             <h2 class="text-rose-500 font-serif-cinematic tracking-[0.4em] text-xs uppercase font-bold mb-4 animate-pulse">Post-Credits Scene</h2>
@@ -499,7 +524,7 @@
                 error.innerText = "";
                 playTone(880, 'sine', 0.3);
                 triggerConfetti();
-                setTimeout(() => goToScreen(2, 'ACT II: THE GOLDEN ERA'), 1000);
+                setTimeout(() => goToScreen(2, 'PART II: HOW IT ALL BEGAN'), 1000);
             } else if (w1 === "bhai" || w2 === "bhai") {
                 playTone(150, 'sawtooth', 0.2);
                 error.innerText = "Literally offensive. Try again. 😤";
@@ -540,7 +565,7 @@
                 icon.innerText = "⏸️";
             } else {
                 audio.pause();
-                status.innerText = "Cinematic Score";
+                status.innerText = "Background Music";
                 icon.innerText = "🎵";
             }
         }
@@ -567,4 +592,3 @@
     </script>
 </body>
 </html>
-    
