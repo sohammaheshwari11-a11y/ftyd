@@ -97,7 +97,7 @@
     <div class="fixed top-8 right-8 z-50 flex items-center gap-3 glass-panel px-4 py-2.5 rounded-full border border-white/10 shadow-2xl">
         <button id="musicToggle" onclick="toggleMusic()" class="flex items-center gap-2 focus:outline-none group">
             <span id="musicIcon" class="text-rose-400 group-hover:scale-110 transition-transform">🎵</span>
-            <span id="musicStatus" class="text-[11px] uppercase tracking-widest text-stone-300 font-semibold">Background Music</span>
+            <span id="musicStatus" class="text-[11px] uppercase tracking-widest text-stone-300 font-semibold">Background Score</span>
         </button>
         <audio id="bgMusic" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=sad-soul-112330.mp3"></audio>
     </div>
@@ -105,14 +105,14 @@
     <!-- HEADER INDICATOR -->
     <div class="fixed top-8 left-8 z-50 flex items-center gap-2 glass-panel px-4 py-2 rounded-full border border-white/10">
         <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-        <span id="chapterTitle" class="text-[10px] font-serif-cinematic uppercase tracking-[0.2em] text-stone-300">PART I: THE PASSCODE</span>
+        <span id="chapterTitle" class="text-[10px] font-serif-cinematic uppercase tracking-[0.2em] text-stone-300">FOR DRISHYA</span>
     </div>
 
 
     <!-- ================= SCREEN 1: PROLOGUE & UNLOCK ================= -->
     <section id="screen1" class="screen active min-h-screen justify-center items-center px-6 text-center max-w-4xl mx-auto py-20 z-20">
         <div class="space-y-6">
-            <span class="text-xs font-serif-cinematic uppercase tracking-[0.4em] text-rose-500 font-bold block animate-pulse">A Letter From Me</span>
+            <span class="text-xs font-serif-cinematic uppercase tracking-[0.4em] text-rose-500 font-bold block animate-pulse">A Note For You</span>
             
             <h1 class="text-3xl md:text-6xl font-serif-cinematic font-light tracking-wider text-white leading-tight">
                 I Hate This Silence, Drishya. <br>
@@ -120,19 +120,13 @@
             </h1>
 
             <p class="mt-6 text-base md:text-lg text-stone-400 font-light leading-relaxed max-w-xl mx-auto">
-                I really like talking to you, and right now, <span class="text-stone-200 font-medium italic">mujhe ghuma firaake bhi nahi bolna...</span>
+                I really love talking to you, and right now, <span class="text-stone-200 font-medium italic">mujhe ghuma firaake bhi nahi bolna...</span>
             </p>
 
-            <div class="py-2">
-                <p class="text-3xl md:text-5xl font-handwritten text-rose-400 tracking-wide drop-shadow-[0_0_15px_rgba(244,63,94,0.3)]">
-                    I really, really, realllyyyy like you ❤️
-                </p>
-            </div>
-
             <!-- Password Box Area -->
-            <div class="mt-8 glass-panel p-8 rounded-3xl max-w-md mx-auto w-full border border-white/10 shadow-2xl">
+            <div class="mt-10 glass-panel p-8 rounded-3xl max-w-md mx-auto w-full border border-white/10 shadow-2xl">
                 <p class="text-xs text-stone-400 uppercase tracking-widest leading-relaxed mb-6">
-                    Enter the phrase that became <span class="text-rose-400 font-semibold">"self-banned"</span> in our chats to unlock.
+                    Enter our favorite phrase to unlock what's inside.
                 </p>
                 
                 <div class="flex justify-center gap-3 mb-6">
@@ -156,7 +150,7 @@
         <div class="w-full text-center space-y-8">
             <div class="space-y-2">
                 <span class="text-xs font-serif-cinematic uppercase tracking-[0.3em] text-rose-500 font-bold">Feb — April Era</span>
-                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">PART II: HOW IT ALL BEGAN</h2>
+                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">HOW IT ALL BEGAN</h2>
             </div>
 
             <div class="glass-panel p-8 md:p-10 rounded-3xl text-left space-y-6 text-stone-300 leading-relaxed font-light border border-white/10 shadow-2xl">
@@ -167,7 +161,7 @@
                 <div class="p-6 bg-rose-950/20 border border-rose-500/20 rounded-2xl space-y-3">
                     <h4 class="text-rose-400 font-serif-cinematic uppercase tracking-widest text-xs font-bold">📞 April 7th — Falling For You</h4>
                     <p class="text-sm text-stone-200 leading-relaxed">
-                        When I first talked to you on call on the 7th of April, I had no idea I was gonna get this attached. As the days went by, I could feel myself slowly falling for you. I think about you all the time—from the moment I wake up to the moment I fall asleep.
+                        When I first talked to you on call on the 7th of April, I had no idea I was gonna get this attached. As the days went by, I could feel myself slowly falling for you. I think about you all the time—from the moment I wake up to the moment I fall asleep. 
                     </p>
                     <p class="text-sm text-stone-200 leading-relaxed">
                         I know for a fact we are meant for each other. Just know I will never let go of you and my feelings will never disappear. I wish I was able to explain how wonderful you are to me... how the sound of your voice gives me butterflies, how hearing your laugh makes me smile. I wish I could also tell you how much I love you, but you leave me loss for words. Even if I put the words together, it wouldn't come anywhere near showing how much you mean to me. I may not be the most perfect guy lol, but of course I'll hold on to this and put in the effort.
@@ -180,8 +174,8 @@
             </div>
 
             <div>
-                <button onclick="goToScreen(3, 'PART III: THE SILENT BATTLES')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
-                    Next: Part III — The Silent Battles →
+                <button onclick="goToScreen(3, 'THE SILENT BATTLES')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
+                    Next: The Silent Battles →
                 </button>
             </div>
         </div>
@@ -193,34 +187,29 @@
         <div class="w-full text-center space-y-8">
             <div class="space-y-2">
                 <span class="text-xs font-serif-cinematic uppercase tracking-[0.3em] text-rose-500 font-bold">May — July Truths</span>
-                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">PART III: THE UNCONTAINED STORMS</h2>
+                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">THE UNCONTAINED STORMS</h2>
             </div>
 
             <div class="glass-panel p-8 md:p-10 rounded-3xl text-left space-y-6 text-stone-300 leading-relaxed font-light border border-white/10 shadow-2xl">
                 <div class="p-6 bg-stone-900/70 border border-white/10 rounded-2xl space-y-3">
-                    <h4 class="text-rose-400 font-serif-cinematic uppercase tracking-widest text-xs font-bold">Post-JEE Depression & Silent Cries</h4>
+                    <h4 class="text-rose-400 font-serif-cinematic uppercase tracking-widest text-xs font-bold">Post-JEE </h4>
                     <p class="text-sm text-stone-300 leading-relaxed">
-                        My exams finished on May 26th. What you didn't know was post-JEE results, college expectations, and pressure pushed me into deep depression. I used to wake up and cry silently, trying my best not to show it to you. <span class="text-rose-300 font-medium">You were literally the ONLY positive thing happening to me in the entire month of June.</span> You held me up when everything was falling apart.
+                        My exams finished on May 26th. What you didn't know was post-JEE results, college expectations, and pressure pushed me into lwk depression. I used to wake up and cry silently, trying my best not to show it to you. <span class="text-rose-300 font-medium">You were literally the ONLY positive thing happening to me in the entire month of June.</span> IDk if i told you or not , or you realised it or not , but it was what i needed the mostt
                     </p>
                 </div>
 
                 <p>
-                    When you told me about your Mumbai trip, I planned to surprise you on our first meet, give you a real gift, and present this website live (<span class="text-rose-300 italic">you have NO idea how many painful coding glitches this site went through!</span>). When that plan fell through, I was heartbroken.
+                    When you told me about your Mumbai trip, I planned to surprise you on our first meet, give some real gifts lol , to keep it memorable , had planned to say all of this a longg ago yaar , shoudlve done this a long agoo , alsoo , wanted to do this o a video call to see your reaction but well well well thecircumstances , im soryyyy (<span class="text-rose-300 italic">you have NO idea how many painful coding glitches this site went through!</span>). When that plan fell through, I was heartbroken.
                 </p>
 
-                <div class="p-5 bg-rose-950/30 border border-rose-500/30 rounded-2xl text-xs space-y-2">
-                    <span class="text-rose-400 font-bold uppercase tracking-widest block">The "Workout Break" Misunderstanding 😭</span>
-                    <p class="text-stone-300">I literally did NOT know what it actually meant! I Googled it randomly and was just talking about it out of care. Kasam se mujhe pata tak nahi tha yawrrr 🥺! When I realized what it meant on our final argument day, I knew anyone would feel grossed out, but swear on everything, I was completely clueless!</p>
-                </div>
-
-                <p class="text-xs text-stone-400 italic">
-                    When you blocked me in early July while I was traveling, I was devastated. College decisions were a shock to me, but my trip to Aurangabad—trekking, playing football and cricket with 15 friends—finally helped me reset and gather courage to say all of this.
+                <p>
+                    I know I got super vulnerable around you, but sometimes I felt like you hadn't gotten to that same level of vulnerability with me yet. You never directly told me how much you liked me or what you liked in me, even though you indirectly showed it through voice notes and compliments. I was always waiting for the moment you expressed something about me in detail so I could send you this link. I was over-invested because <span class="text-rose-300 font-medium">the guy loves more</span>.
                 </p>
             </div>
 
             <div>
-                <button onclick="goToScreen(4, 'PART IV: ARCHIVES & BLUEPRINT')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
-                    Next: Part IV — Archives & Blueprint →
+                <button onclick="goToScreen(4, 'ARCHIVES & BLUEPRINT')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
+                    Next: Archives & Blueprint →
                 </button>
             </div>
         </div>
@@ -231,7 +220,7 @@
     <section id="screen4" class="screen min-h-screen justify-center items-center px-6 max-w-5xl mx-auto py-24 z-20">
         <div class="w-full text-center space-y-10">
             <div class="space-y-2">
-                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">PART IV: ARCHIVES & BLUEPRINT</h2>
+                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">ARCHIVES & BLUEPRINT</h2>
                 <p class="text-xs text-rose-500 uppercase tracking-[0.3em] font-semibold">Specific details & decrypted letters</p>
             </div>
 
@@ -261,32 +250,32 @@
 
             <!-- Interactive Letters Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
-                <div onclick="openLetter(1)" class="glass-card p-5 rounded-2xl cursor-pointer group flex justify-between items-center">
+                <div onclick="openLetter(1)" class="glass-card p-6 rounded-2xl cursor-pointer group flex justify-between items-center border border-white/10">
                     <div>
-                        <span class="text-[9px] font-serif-cinematic text-rose-500 block">LETTER 01</span>
-                        <h4 class="text-sm text-stone-200 group-hover:text-white">Taking the Lead</h4>
+                        <span class="text-[10px] font-serif-cinematic text-rose-500 block">RECORD 01</span>
+                        <h4 class="text-base font-medium text-stone-200 group-hover:text-white">Taking the Lead</h4>
                     </div>
-                    <span>📁</span>
+                    <span class="text-xl">📁</span>
                 </div>
-                <div onclick="openLetter(2)" class="glass-card p-5 rounded-2xl cursor-pointer group flex justify-between items-center">
+                <div onclick="openLetter(2)" class="glass-card p-6 rounded-2xl cursor-pointer group flex justify-between items-center border border-white/10">
                     <div>
-                        <span class="text-[9px] font-serif-cinematic text-rose-500 block">LETTER 02</span>
-                        <h4 class="text-sm text-stone-200 group-hover:text-white">Support & Convos</h4>
+                        <span class="text-[10px] font-serif-cinematic text-rose-500 block">RECORD 02</span>
+                        <h4 class="text-base font-medium text-stone-200 group-hover:text-white">Communication & Support</h4>
                     </div>
-                    <span>📁</span>
+                    <span class="text-xl">📁</span>
                 </div>
-                <div onclick="openLetter(3)" class="glass-card p-5 rounded-2xl cursor-pointer group flex justify-between items-center">
+                <div onclick="openLetter(3)" class="glass-card p-6 rounded-2xl cursor-pointer group flex justify-between items-center border border-white/10">
                     <div>
-                        <span class="text-[9px] font-serif-cinematic text-rose-500 block">LETTER 03</span>
-                        <h4 class="text-sm text-stone-200 group-hover:text-white">Silence & Impact</h4>
+                        <span class="text-[10px] font-serif-cinematic text-rose-500 block">RECORD 03</span>
+                        <h4 class="text-base font-medium text-stone-200 group-hover:text-white">Silence & Impact</h4>
                     </div>
-                    <span>📁</span>
+                    <span class="text-xl">📁</span>
                 </div>
             </div>
 
             <div>
-                <button onclick="goToScreen(5, 'PART V: THE ABSOLUTE BADDIE')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
-                    Next: Part V — The Absolute Baddie ✨ →
+                <button onclick="goToScreen(5, 'THE ABSOLUTE BADDIE')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
+                    Next: The Absolute Baddie ✨ →
                 </button>
             </div>
         </div>
@@ -306,7 +295,7 @@
         <div class="w-full text-center space-y-8">
             <div class="space-y-2">
                 <span class="text-xs font-serif-cinematic uppercase tracking-[0.3em] text-rose-500 font-bold">Pure Appreciation</span>
-                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">PART V: THE ABSOLUTE BADDIE</h2>
+                <h2 class="font-serif-cinematic text-3xl md:text-5xl text-white tracking-widest">THE ABSOLUTE BADDIE</h2>
             </div>
 
             <p class="text-stone-300 text-sm font-light max-w-xl mx-auto leading-relaxed">
@@ -344,19 +333,19 @@
                 </p>
 
                 <div class="p-4 bg-white/5 border border-white/10 rounded-2xl text-center space-y-2">
-                    <span class="text-[10px] font-serif-cinematic font-bold uppercase text-rose-400 tracking-[0.2em]">Solemn Oath</span>
-                    <p class="text-xs text-stone-200 font-light">Do you promise to NEVER block me again when things get rough?</p>
+                    <span class="text-[10px] font-serif-cinematic font-bold uppercase text-rose-400 tracking-[0.2em]">Solemn Promise</span>
+                    <p class="text-xs text-stone-200 font-light">Shall we agree to talk things out when times get tough?</p>
                     <div class="flex gap-3 justify-center pt-1">
-                        <button onclick="answerOath(true)" class="text-xs font-serif-cinematic tracking-wider py-2 px-5 border border-rose-500/50 rounded-xl hover:bg-rose-500/20 transition-all text-rose-300 font-bold">I Promise ❤️</button>
-                        <button onclick="answerOath(false)" class="text-xs font-serif-cinematic tracking-wider py-2 px-5 border border-white/10 rounded-xl hover:bg-white/5 transition-all text-stone-500">I need to think...</button>
+                        <button onclick="answerOath(true)" class="text-xs font-serif-cinematic tracking-wider py-2 px-5 border border-rose-500/50 rounded-xl hover:bg-rose-500/20 transition-all text-rose-300 font-bold">I Agree ❤️</button>
+                        <button onclick="answerOath(false)" class="text-xs font-serif-cinematic tracking-wider py-2 px-5 border border-white/10 rounded-xl hover:bg-white/5 transition-all text-stone-500">I need time...</button>
                     </div>
                     <p id="oathFeedback" class="text-xs font-medium h-4"></p>
                 </div>
             </div>
 
             <div>
-                <button onclick="goToScreen(6, 'PART VI: THE FINALE')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
-                    Proceed to Part VI: The Finale →
+                <button onclick="goToScreen(6, 'THE FINALE')" class="glass-panel text-stone-300 text-xs font-serif-cinematic tracking-[0.3em] uppercase py-4 px-10 rounded-full hover:bg-rose-600 hover:text-white transition-all border border-white/10">
+                    Proceed to The Finale →
                 </button>
             </div>
         </div>
@@ -374,7 +363,7 @@
                 <div class="text-rose-500 font-serif-cinematic tracking-widest text-xl">I'm sorryyyyy</div>
                 <div class="text-stone-400">Your cute laugh that day on call... omg, that was so special.</div>
                 <div class="text-rose-500 font-serif-cinematic tracking-widest text-2xl">I'm sorryyyyy</div>
-                <div class="text-stone-400">Bahaut bada hogaya text 😭 (That's what she said lol!)</div>
+                <div class="text-stone-400">Bahaut bada hogaya 😭 (That's what she said lol!)</div>
                 <div class="text-rose-500 font-serif-cinematic tracking-widest text-3xl">I'm sorryyyyy</div>
                 <div class="text-stone-400">Tu wapas kyu nahi aayi 😤... drop the ego now 😋</div>
                 <div class="text-stone-500 text-sm">Almost at the secret code...</div>
@@ -409,8 +398,8 @@
                 </div>
                 
                 <div>
-                    <a href="https://discord.com" target="_blank" class="inline-block bg-white text-black text-xs font-serif-cinematic tracking-[0.25em] uppercase font-bold py-5 px-12 rounded-full shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:bg-rose-600 hover:text-white transition-all duration-500 transform hover:scale-105">
-                        Ok, Text / DM Me Now ❤️
+                    <a href="https://instagram.com" target="_blank" class="inline-block bg-white text-black text-xs font-serif-cinematic tracking-[0.25em] uppercase font-bold py-5 px-12 rounded-full shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:bg-rose-600 hover:text-white transition-all duration-500 transform hover:scale-105">
+                        DM Me on Instagram ❤️
                     </a>
                 </div>
             </div>
@@ -474,18 +463,19 @@
             } catch(e) {}
         }
 
-        /* DATA & NAVIGATION ENGINE */
+        /* EXPANDED DETAILED LETTERS DATA */
         const letterData = {
-            1: `<h4 class="text-xs uppercase font-serif-cinematic font-bold text-rose-500 tracking-widest mb-3">Letter 01</h4>
-                <p>Until now, I think I <span class="bg-rose-900/40 text-rose-200 font-medium px-1.5 py-0.5 rounded">never took the lead in this relationship</span> because I was kinda scared. But right now, <span class="text-white font-medium">I really want to take the lead</span>.</p>
-                <p>Now that I'm free from exams, I feel incredibly good about this whole thing when I sit down and think about all of it. ❤️</p>`,
+            1: `<h4 class="text-xs uppercase font-serif-cinematic font-bold text-rose-500 tracking-widest mb-3">Record 01 — Taking the Lead</h4>
+                <p class="leading-relaxed">Until now, I think I <span class="bg-rose-900/40 text-rose-200 font-medium px-1.5 py-0.5 rounded">never took the lead in this relationship</span> because I was kinda scared. But right now, <span class="text-white font-medium">I really want to take the lead</span>.</p>
+                <p class="leading-relaxed mt-3">Now that I'm free from exams, I feel incredibly good about this whole thing when I sit down and think about all of it. I want to build a foundation where you never have to second-guess my intentions or my effort. ❤️</p>`,
                 
-            2: `<h4 class="text-xs uppercase font-serif-cinematic font-bold text-rose-500 tracking-widest mb-3">Letter 02</h4>
-                <p>I really was unsure on how to talk with you at first, but <span class="bg-rose-900/40 text-rose-200 font-medium px-1.5 py-0.5 rounded">you really made it easy to talk</span>. You validated me, you even supported me...</p>
-                <p>I really, <span class="text-white font-medium">really love that side of you</span>, especially when you aren't afraid to communicate.</p>`,
+            2: `<h4 class="text-xs uppercase font-serif-cinematic font-bold text-rose-500 tracking-widest mb-3">Record 02 — Communication & Support</h4>
+                <p class="leading-relaxed">I really was unsure on how to talk with you at first, but <span class="bg-rose-900/40 text-rose-200 font-medium px-1.5 py-0.5 rounded">you really made it easy to talk</span>. You validated me, you even supported me through some of my toughest days...</p>
+                <p class="leading-relaxed mt-3">I really, <span class="text-white font-medium">really love that side of you</span>, especially when you aren't afraid to communicate directly. That emotional intelligence and security is rare, Drishya, and it made me value you even more.</p>`,
                 
-            3: `<h4 class="text-xs uppercase font-serif-cinematic font-bold text-rose-500 tracking-widest mb-3">Letter 03</h4>
-                <p>Even when we got into our last convo, <span class="bg-white/10 text-stone-200 font-medium px-1.5 py-0.5 rounded">I came into it as a discussion, never ever to end it</span>. When you blocked me, <span class="bg-rose-900/40 text-rose-200 font-medium px-1.5 py-0.5 rounded">this silence, it really bites 😔</span>. Breaks like these just make us feel how important the person actually was.</p>`
+            3: `<h4 class="text-xs uppercase font-serif-cinematic font-bold text-rose-500 tracking-widest mb-3">Record 03 — Silence & Impact</h4>
+                <p class="leading-relaxed">Even when we got into our last convo, <span class="bg-white/10 text-stone-200 font-medium px-1.5 py-0.5 rounded">I came into it as a discussion, never ever to end it</span>. I never had intentions to end it, and I never will.</p>
+                <p class="leading-relaxed mt-3">When you blocked me, <span class="bg-rose-900/40 text-rose-200 font-medium px-1.5 py-0.5 rounded">this silence, it really bites 😔</span>. Breaks like these just make us feel how important the person actually was, and how deep the disconnect feels when you aren't around.</p>`
         };
 
         function goToScreen(screenNumber, chapterName) {
@@ -524,7 +514,7 @@
                 error.innerText = "";
                 playTone(880, 'sine', 0.3);
                 triggerConfetti();
-                setTimeout(() => goToScreen(2, 'PART II: HOW IT ALL BEGAN'), 1000);
+                setTimeout(() => goToScreen(2, 'HOW IT ALL BEGAN'), 1000);
             } else if (w1 === "bhai" || w2 === "bhai") {
                 playTone(150, 'sawtooth', 0.2);
                 error.innerText = "Literally offensive. Try again. 😤";
@@ -533,7 +523,7 @@
                 error.innerText = "Fill both boxes!";
             } else {
                 playTone(200, 'square', 0.1);
-                error.innerText = "Incorrect phrase. Think about what got banned.";
+                error.innerText = "Incorrect phrase. Think about our line.";
             }
         }
 
@@ -565,7 +555,7 @@
                 icon.innerText = "⏸️";
             } else {
                 audio.pause();
-                status.innerText = "Background Music";
+                status.innerText = "Background Score";
                 icon.innerText = "🎵";
             }
         }
@@ -576,11 +566,11 @@
                 playTone(700, 'sine', 0.2);
                 triggerConfetti();
                 feedback.className = "text-xs mt-2 font-medium text-emerald-400";
-                feedback.innerText = "Oath sealed! Communication wins forever. ❤️";
+                feedback.innerText = "Promise sealed! Communication wins forever. ❤️";
             } else {
                 playTone(180, 'sawtooth', 0.2);
                 feedback.className = "text-xs mt-2 font-medium text-rose-400";
-                feedback.innerText = "Wrong option! Click 'I Promise' 👀";
+                feedback.innerText = "Wrong option! Click 'I Agree' 👀";
             }
         }
 
